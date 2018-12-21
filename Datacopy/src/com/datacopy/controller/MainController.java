@@ -3,6 +3,7 @@ package com.datacopy.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.Props;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -27,10 +28,12 @@ public class MainController implements Initializable {
 		
 	}
 	
-	public void fetchQueries() {
+	public void fetchQueries() throws Exception {
+		Props p = new Props();
 		
 		if(ca4.isSelected()) {
 			System.out.println("Sucess.....");
+			System.out.println(p.getProperties().getProperty("SEED"));
 		}
 		
 	}
