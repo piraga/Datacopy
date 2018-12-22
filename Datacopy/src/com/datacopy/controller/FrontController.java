@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import application.Main;
+import com.datacopy.application.Main;
+import com.datacopy.application.PopUp;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -28,6 +30,7 @@ public class FrontController  implements Initializable {
 	TextField password = new TextField();
 	
 	Main main = new Main();
+	PopUp popUp=new PopUp();
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -36,14 +39,12 @@ public class FrontController  implements Initializable {
 	
 	public void connectDatabase() {
 		connectdb.setDisable(true);
-		
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Confirmation Dialog");
-		alert.setHeaderText("Make sure database credentials is correct ?");
-		alert.setContentText("Username:"+username.getText()+" "+"Password:"+password.getText()+" "+
-		"Port"+portnumber.getText()+" "+"Hostname"+hostname.getText()+" "+sid.getText());
 		try {
-			main.changeScene();
+		boolean process=popUp.processPermission(username.getText(), password.getText(), portnumber.getText(), 
+				hostname.getText(), sid.getText());
+	
+		
+		main.changeScene();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

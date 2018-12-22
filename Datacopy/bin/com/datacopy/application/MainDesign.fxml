@@ -20,12 +20,12 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="86.0" promptText="Account Id" />
+                        <TextField fx:id="acctid" layoutX="86.0" promptText="Account Id" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="28.0" layoutY="87.0">
                      <children>
-                        <TextField layoutX="86.0" promptText="Security Id" />
+                        <TextField fx:id="secid" layoutX="86.0" promptText="Security Id" />
                         <Label layoutY="3.0" text="Security Id:">
                            <font>
                               <Font size="15.0" />

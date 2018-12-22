@@ -1,4 +1,4 @@
-package application;
+package com.datacopy.application;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,5 +18,6 @@ public class Props {
 		System.out.println(p.getProperty("SEED"));
 		return p;
 	}
+
 
 }

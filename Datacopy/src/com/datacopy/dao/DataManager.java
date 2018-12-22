@@ -7,17 +7,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
-import application.Props;
+import com.datacopy.application.PopUp;
+import com.datacopy.application.Props;
 
 public class DataManager {
 	
-	public static Connection con;
+	private static Connection con;
+	private PopUp popUp=null;
 	
 	
 	
-	public static void connectDb(String userName, String  passWord, String sid, String hostName, String port) {
-		
+	public void connectDb(String userName, String  passWord, String sid, String hostName, String port) {
+		popUp=new PopUp();
 		try {
 			Class.forName("oracle.jdbc.driver.oracleDriver");
 			
@@ -29,6 +30,7 @@ public class DataManager {
 			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println("Please check connection");
+			popUp.connectionFail();
 		}
 		
 	}
@@ -51,7 +53,7 @@ public class DataManager {
 				ps.setString(i,value);
 			}
 			System.out.println(ps);
-			rs = ps.executeQuery();
+//			rs = ps.executeQuery();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,11 +89,11 @@ public class DataManager {
 		}
 	}
 	
-	public static void main(String ards[]) {
-		DataManager dm = new DataManager();
-		Object[] pstat= {"hai"};
-		dm.executeQueryByName("SEED", pstat);
-	}
+//	public static void main(String ards[]) {
+//		DataManager dm = new DataManager();
+//		Object[] pstat= {"hai"};
+//		dm.executeQueryByName("SEED", pstat);
+//	}
 	
 	
 
