@@ -10,6 +10,8 @@ import java.sql.Statement;
 import com.datacopy.application.PopUp;
 import com.datacopy.application.Props;
 
+import javafx.scene.control.ProgressBar;
+
 public class DataManager {
 	
 	private static Connection con;
@@ -23,7 +25,8 @@ public class DataManager {
 			Class.forName("oracle.jdbc.driver.oracleDriver");
 			
 			con = DriverManager.getConnection("jdbc:oracle:thin:@"+hostName+":"+port+":"+sid,userName,passWord);
-			
+			ProgressBar pb = new ProgressBar();
+			pb.setProgress(0.5);
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

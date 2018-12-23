@@ -44,31 +44,30 @@ public class PopUp {
 		choice.setContentText("Choose your wish");
 		Optional<String> selection=choice.showAndWait();
 		System.out.println(selection.get());
-		
+		if (selection.get().equalsIgnoreCase("Account Security Wise"))
+			return true;
 		System.out.println(selection);
-		return true;
+		return false;
 		
 	}
 	
-	public void initialValidation(String acctId, String secId) {
+	public void initialValidation(String acctId, String secId) throws Exception {
 		boolean isAcctSec;
 		Main main = new Main();
 		PopUp popUp = new PopUp();
 		isAcctSec=popUp.isAcctSec();
-		if( acctId.isEmpty() ) {
+		if( acctId.trim().isEmpty() ) {
 			alert=new Alert(AlertType.WARNING);
 			alert.setTitle("Warning PopUp");
-			alert.setHeaderText("Account ID is Emplty...");
+			alert.setHeaderText("Account ID is Emplty ");
 			alert.showAndWait();
-			try {
-				main.changeScene();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-			System.out.println("Empty acctid");
+			throw new Exception();			
+		}else if(isAcctSec && secId.trim().isEmpty()){
+			alert=new Alert(AlertType.WARNING);
+			alert.setTitle("Warning PopUp");
+			alert.setHeaderText("Security ID is Emplty ");
+			alert.showAndWait();
+			throw new Exception();	
 			
 		}
 		

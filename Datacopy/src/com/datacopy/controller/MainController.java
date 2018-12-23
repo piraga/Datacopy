@@ -3,6 +3,7 @@ package com.datacopy.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.datacopy.application.Main;
 import com.datacopy.application.PopUp;
 import com.datacopy.application.Props;
 
@@ -26,11 +27,14 @@ public class MainController implements Initializable {
 	CheckBox ca4;
 	@FXML
 	TextField acctid,secid;
+	@FXML
+	TextArea textarea;
 	
 	private boolean isAcctSec;
 	private String acctId;
 	private String secId;
 	
+	Main main = new Main();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -42,8 +46,17 @@ public class MainController implements Initializable {
 		Props p = new Props();
 		acctId=acctid.getText();
 		secId = secid.getText();
+		textarea.setText("Welcome");
 		PopUp popUp = new PopUp();
-		popUp.initialValidation(acctId, secId);
+//		textarea.appendText("\"12364541");
+		try {
+//			textarea.appendText("\"12364541");
+			popUp.initialValidation(acctId, secId);
+			textarea.appendText("\"12364541");
+		} catch (Exception e) {
+			System.out.println("Catch blocjk");
+		}
+		
 		System.out.println(acctid.getText()+secid.getText());
 		if(ca4.isSelected()) {
 			System.out.println("Sucess.....");
@@ -53,6 +66,14 @@ public class MainController implements Initializable {
 	}
 	
 	public void goBack() {
+		
+		try {
+			main.goPrevious();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 	

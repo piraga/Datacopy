@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 
 public class FrontController  implements Initializable {
@@ -34,12 +35,14 @@ public class FrontController  implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
+		sid.setFocusTraversable(false);
 	}
 	
 	public void connectDatabase() {
 		connectdb.setDisable(true);
 		try {
+			ProgressBar pb = new ProgressBar();
+			pb.setProgress(0.5);
 		boolean process=popUp.processPermission(username.getText(), password.getText(), portnumber.getText(), 
 				hostname.getText(), sid.getText());
 	
