@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 
@@ -25,7 +26,7 @@ public class Main extends Application {
 		try {
 			Parent root = FXMLLoader.load(getClass()
                     .getResource("FrontDesign.fxml"));
-			primaryStage.resizableProperty().setValue(Boolean.FALSE);//Disable maximize icon
+//			primaryStage.resizableProperty().setValue(Boolean.FALSE);//Disable maximize icon
 			primaryStage.getIcons().add(new Image("file:logo.png"));
 //			primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/Properties/Datacopy_logo.png")));
 			primaryStage.setTitle("Datacopy 19.1");
@@ -44,13 +45,13 @@ public class Main extends Application {
 		
 	
 		Stage stage = new Stage();
-		AnchorPane pane = FXMLLoader.load(getClass().getResource("MainDesign.fxml"));
-		stage.resizableProperty().setValue(Boolean.FALSE);//Disable maximize icon
+		Parent pane = FXMLLoader.load(getClass().getResource("MainDesign.fxml"));
+//		stage.resizableProperty().setValue(Boolean.FALSE);//Disable maximize icon
         Scene scene = new Scene(pane);
-        stage.setScene(scene);
-        stage.show();
-        prev.close();
-        prev=stage;
+        prev.setScene(scene);
+        prev.show();
+//        prev.close();
+//        prev=stage;
 		
 		
 	}
@@ -59,14 +60,14 @@ public class Main extends Application {
 	public void goPrevious() throws Exception {
 		
 		Stage stage = new Stage();
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("FrontDesign.fxml"));
+        Parent pane = FXMLLoader.load(getClass().getResource("FrontDesign.fxml"));
         Scene scene = new Scene(pane);
+//        prev.close();
+        prev.setScene(scene);
+//        stage.resizableProperty().setValue(Boolean.FALSE);//Disable maximize icon
+        prev.show();
         
-        stage.setScene(scene);
-        stage.resizableProperty().setValue(Boolean.FALSE);//Disable maximize icon
-        stage.show();
-        prev.close();
-        prev=stage;
+//        prev=stage;
 		
 	}
 	

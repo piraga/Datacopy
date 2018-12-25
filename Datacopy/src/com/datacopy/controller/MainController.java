@@ -17,14 +17,12 @@ import javafx.scene.layout.AnchorPane;
 
 public class MainController implements Initializable {
 	
+	
 	@FXML
-	AnchorPane testarea;
+	Button getQueries,goBack;
 	@FXML
-	Button getQueries;
-	@FXML
-	Button goBack;
-	@FXML
-	CheckBox ca4;
+	CheckBox sviRad,sviSeed,sviTrd,sviCli,accountMaster,secMaster,caAcctSec,caPayout,caTerms,caBroker,
+	corpAct,hpsMaster,hpsDetail,stepUp;
 	@FXML
 	TextField acctid,secid;
 	@FXML
@@ -46,19 +44,19 @@ public class MainController implements Initializable {
 		Props p = new Props();
 		acctId=acctid.getText();
 		secId = secid.getText();
-		textarea.setText("Welcome");
+		textarea.setText("Welcomesckavkavnaljvnlasvnlasnas;ms;kcnas;kslkmsa;ck");
 		PopUp popUp = new PopUp();
 //		textarea.appendText("\"12364541");
 		try {
 //			textarea.appendText("\"12364541");
-			popUp.initialValidation(acctId, secId);
-			textarea.appendText("\"12364541");
+			isAcctSec=popUp.initialValidation(acctId, secId);
+//			textarea.appendText("\"12364541");
 		} catch (Exception e) {
 			System.out.println("Catch blocjk");
 		}
 		
 		System.out.println(acctid.getText()+secid.getText());
-		if(ca4.isSelected()) {
+		if(sviRad.isSelected()) {
 			System.out.println("Sucess.....");
 			System.out.println(p.getProperties().getProperty("SEED"));
 		}

@@ -7,13 +7,29 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.datacopy.controller.MainController">
-   <children>
-      <SplitPane dividerPositions="0.27963272120200333" prefHeight="800.0" prefWidth="1200.0">
-        <items>
-          <AnchorPane fx:id="testarea" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+
+<SplitPane dividerPositions="0.35" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.datacopy.controller.MainController">
+  <items>
+      <GridPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="335.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="450.0" minWidth="50.0" prefWidth="500.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <VBox alignment="CENTER" spacing="20.0">
                <children>
-                  <AnchorPane layoutX="28.0" layoutY="45.0">
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label text="Datacopy">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="28.0" layoutY="45.0" spacing="10.0">
                      <children>
                         <Label layoutY="5.0" text="Account Id:">
                            <font>
@@ -22,79 +38,85 @@
                         </Label>
                         <TextField fx:id="acctid" layoutX="86.0" promptText="Account Id" />
                      </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="28.0" layoutY="87.0">
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="28.0" layoutY="87.0" spacing="10.0">
                      <children>
-                        <TextField fx:id="secid" layoutX="86.0" promptText="Security Id" />
                         <Label layoutY="3.0" text="Security Id:">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
+                        <TextField fx:id="secid" layoutX="86.0" promptText="Security Id" />
                      </children>
-                  </AnchorPane>
-                  <Button fx:id="getQueries" layoutX="113.0" layoutY="655.0" mnemonicParsing="false" onAction="#fetchQueries" text="Get Queries" />
-                  <CheckBox fx:id="ca4" layoutX="112.0" layoutY="432.0" mnemonicParsing="false" text="CA4" />
-                  <CheckBox blendMode="SOFT_LIGHT" layoutX="112.0" layoutY="219.0" mnemonicParsing="false" text="SVI SEED">
-                     <effect>
-                        <Bloom threshold="1.0" />
-                     </effect>
-                  </CheckBox>
-                  <CheckBox blendMode="SOFT_LIGHT" layoutX="112.0" layoutY="246.0" mnemonicParsing="false" text="SVI CLI">
-                     <effect>
-                        <Bloom threshold="1.0" />
-                     </effect>
-                  </CheckBox>
-                  <CheckBox layoutX="112.0" layoutY="402.0" mnemonicParsing="false" text="CA3" />
-                  <CheckBox blendMode="SOFT_LIGHT" layoutX="112.0" layoutY="492.0" mnemonicParsing="false" text="FIP HPS Detail">
-                     <effect>
-                        <Bloom threshold="1.0" />
-                     </effect>
-                  </CheckBox>
-                  <CheckBox layoutX="112.0" layoutY="370.0" mnemonicParsing="false" text="Corp act" />
-                  <CheckBox blendMode="SOFT_LIGHT" layoutX="112.0" layoutY="522.0" mnemonicParsing="false" text="Stepup Transactios">
-                     <effect>
-                        <Bloom threshold="1.0" />
-                     </effect>
-                  </CheckBox>
-                  <CheckBox blendMode="SOFT_LIGHT" layoutX="112.0" layoutY="190.0" mnemonicParsing="false" text="SVI TRD">
-                     <effect>
-                        <Bloom threshold="1.0" />
-                     </effect>
-                  </CheckBox>
-                  <CheckBox alignment="CENTER" blendMode="SOFT_LIGHT" contentDisplay="CENTER" layoutX="112.0" layoutY="158.0" lineSpacing="5.0" mnemonicParsing="false" text="SVI RAD">
-                     <effect>
-                        <Bloom threshold="1.0" />
-                     </effect>
-                  </CheckBox>
-                  <CheckBox layoutX="112.0" layoutY="461.0" mnemonicParsing="false" text="FIP HPS Master" />
-                  <CheckBox blendMode="SOFT_LIGHT" layoutX="112.0" layoutY="338.0" mnemonicParsing="false" text="Ca Acct sec">
-                     <effect>
-                        <Bloom threshold="1.0" />
-                     </effect>
-                  </CheckBox>
-                  <CheckBox blendMode="SOFT_LIGHT" layoutX="112.0" layoutY="306.0" mnemonicParsing="false" text="Sec master">
-                     <effect>
-                        <Bloom threshold="1.0" />
-                     </effect>
-                  </CheckBox>
-                  <CheckBox blendMode="SOFT_LIGHT" layoutX="112.0" layoutY="276.0" mnemonicParsing="false" text="Accunt master">
-                     <effect>
-                        <Bloom threshold="1.0" />
-                     </effect>
-                  </CheckBox>
-                  <Button fx:id="goBack" layoutY="2.0" mnemonicParsing="false" onAction="#goBack" prefHeight="27.0" prefWidth="68.0" text="Back" AnchorPane.bottomAnchor="771.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  </HBox>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <VBox layoutX="112.0" layoutY="158.0" spacing="10.0">
+                           <children>
+                              <CheckBox fx:id="sviRad" alignment="CENTER" contentDisplay="CENTER" layoutX="112.0" layoutY="158.0" lineSpacing="5.0" mnemonicParsing="false" text="SVI RAD">
+                                 <effect>
+                                    <Bloom threshold="1.0" />
+                                 </effect>
+                              </CheckBox>
+                              <CheckBox fx:id="sviTrd" layoutX="112.0" layoutY="190.0" mnemonicParsing="false" text="SVI TRD">
+                                 <effect>
+                                    <Bloom threshold="1.0" />
+                                 </effect>
+                              </CheckBox>
+                              <CheckBox fx:id="sviSeed" layoutX="112.0" layoutY="219.0" mnemonicParsing="false" text="SVI SEED">
+                                 <effect>
+                                    <Bloom threshold="1.0" />
+                                 </effect>
+                              </CheckBox>
+                              <CheckBox fx:id="sviCli" layoutX="112.0" layoutY="246.0" mnemonicParsing="false" text="SVI CLI">
+                                 <effect>
+                                    <Bloom threshold="1.0" />
+                                 </effect>
+                              </CheckBox>
+                              <CheckBox fx:id="accountMaster" layoutX="112.0" layoutY="276.0" mnemonicParsing="false" text="Account master">
+                                 <effect>
+                                    <Bloom threshold="1.0" />
+                                 </effect>
+                              </CheckBox>
+                              <CheckBox fx:id="secMaster" layoutX="112.0" layoutY="306.0" mnemonicParsing="false" text="Sec master">
+                                 <effect>
+                                    <Bloom threshold="1.0" />
+                                 </effect>
+                              </CheckBox>
+                              <CheckBox fx:id="caAcctSec" layoutX="112.0" layoutY="338.0" mnemonicParsing="false" text="Ca Acct sec" />
+                              <CheckBox fx:id="caPayout" layoutX="112.0" layoutY="370.0" mnemonicParsing="false" text="Corp act payout" />
+                              <CheckBox fx:id="caTerms" layoutX="112.0" layoutY="402.0" mnemonicParsing="false" text="Corp act terms" />
+                              <CheckBox fx:id="caBroker" layoutX="112.0" layoutY="432.0" mnemonicParsing="false" text="Corp act broker" />
+                              <CheckBox fx:id="corpAct" mnemonicParsing="false" text="Corp act" />
+                              <CheckBox fx:id="hpsMaster" layoutX="112.0" layoutY="461.0" mnemonicParsing="false" text="FIP HPS Master" />
+                              <CheckBox fx:id="hpsDetail" layoutX="112.0" layoutY="492.0" mnemonicParsing="false" text="FIP HPS Detail">
+                                 <effect>
+                                    <Bloom threshold="1.0" />
+                                 </effect>
+                              </CheckBox>
+                              <CheckBox fx:id="stepUp" layoutX="112.0" layoutY="522.0" mnemonicParsing="false" text="Stepup Transactios">
+                                 <effect>
+                                    <Bloom threshold="1.0" />
+                                 </effect>
+                              </CheckBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="75.0" layoutY="550.0" spacing="40.0">
+                     <children>
+                        <Button fx:id="goBack" layoutX="28.0" layoutY="642.0" mnemonicParsing="false" onAction="#goBack" prefHeight="27.0" prefWidth="68.0" text="Back" />
+                        <Button fx:id="getQueries" layoutX="113.0" layoutY="655.0" mnemonicParsing="false" onAction="#fetchQueries" text="Get Queries" />
+                     </children>
+                  </HBox>
                </children>
-               <effect>
-                  <Blend />
-               </effect>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <TextArea fx:id="textarea" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
-   </children>
-</AnchorPane>
+            </VBox>
+         </children>
+      </GridPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <TextArea fx:id="textarea" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+  </items>
+</SplitPane>

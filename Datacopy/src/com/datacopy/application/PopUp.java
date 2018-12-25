@@ -51,7 +51,7 @@ public class PopUp {
 		
 	}
 	
-	public void initialValidation(String acctId, String secId) throws Exception {
+	public boolean initialValidation(String acctId, String secId) throws Exception {
 		boolean isAcctSec;
 		Main main = new Main();
 		PopUp popUp = new PopUp();
@@ -70,7 +70,7 @@ public class PopUp {
 			throw new Exception();	
 			
 		}
-		
+		return isAcctSec;
 		
 		
 	}

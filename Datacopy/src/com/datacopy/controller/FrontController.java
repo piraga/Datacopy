@@ -14,6 +14,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 public class FrontController  implements Initializable {
 	
@@ -30,12 +31,14 @@ public class FrontController  implements Initializable {
 	@FXML
 	TextField password = new TextField();
 	
+	
 	Main main = new Main();
 	PopUp popUp=new PopUp();
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		sid.setFocusTraversable(false);
+		sid.setFocusTraversable(false);// TO disable cursor from automatic pointing to text field
+		
 	}
 	
 	public void connectDatabase() {
@@ -53,7 +56,7 @@ public class FrontController  implements Initializable {
 			e.printStackTrace();
 		}
 		
-		System.out.println("Hai"+sid.getText()+username.getText()+hostname.getText()+portnumber.getText()+sid.getText());
+		System.out.println("Hai"+sid.getText()+username.getText()+password.getText()+hostname.getText()+portnumber.getText()+sid.getText());
 		connectdb.setDisable(false);
 	}
 	
