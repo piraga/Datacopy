@@ -6,6 +6,10 @@ import java.util.ResourceBundle;
 import com.datacopy.application.Main;
 import com.datacopy.application.PopUp;
 import com.datacopy.application.Props;
+import com.datacopy.process.DataCopy;
+import com.datacopy.process.FetchAcct;
+import com.datacopy.process.FetchAcctSec;
+import com.datacopy.process.FetchTables;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,11 +50,26 @@ public class MainController implements Initializable {
 		secId = secid.getText();
 		textarea.setText("Welcomesckavkavnaljvnlasvnlasnas;ms;kcnas;kslkmsa;ck");
 		PopUp popUp = new PopUp();
+		DataCopy proc;
 //		textarea.appendText("\"12364541");
 		try {
 //			textarea.appendText("\"12364541");
 			isAcctSec=popUp.initialValidation(acctId, secId);
 //			textarea.appendText("\"12364541");
+			if(isAcctSec) {
+				proc=new FetchAcctSec(acctId,secId,sviRad.isSelected(), sviSeed.isSelected(), sviTrd.isSelected(),
+						sviCli.isSelected(), accountMaster.isSelected(), secMaster.isSelected(),
+						caAcctSec.isSelected(), caPayout.isSelected(), caTerms.isSelected(),
+						caBroker.isSelected(), corpAct.isSelected(),
+						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected());
+			}else {
+				proc=new FetchAcct(acctId,sviRad.isSelected(), sviSeed.isSelected(), sviTrd.isSelected(),
+						sviCli.isSelected(), accountMaster.isSelected(), secMaster.isSelected(),
+						caAcctSec.isSelected(), caPayout.isSelected(), caTerms.isSelected(),
+						caBroker.isSelected(), corpAct.isSelected(),
+						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected());
+			}
+			
 		} catch (Exception e) {
 			System.out.println("Catch blocjk");
 		}
