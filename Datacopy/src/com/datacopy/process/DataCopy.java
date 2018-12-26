@@ -149,5 +149,17 @@ public class DataCopy {
 	public void setStepUp(boolean stepUp) {
 		this.stepUp = stepUp;
 	}
+	
+	public String splitAcctId(String acctId) {
+		String[] accNo=acctId.split("-");
+		return accNo[2];
+		
+	}
+	
+	public String splitSecId(String secId) {
+		String[] secNo=secId.split("-");
+		return secNo[1];
+		
+	}
 
 }
