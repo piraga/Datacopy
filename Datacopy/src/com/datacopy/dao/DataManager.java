@@ -38,7 +38,7 @@ public class DataManager {
 		
 	}
 	
-	public ResultSet executeQueryByName(String query, Object[] pstm) {
+	public ResultSet executeQueryByName(String query, String[] pstm) {
 		
 		
 		ResultSet rs = null ;
@@ -52,7 +52,7 @@ public class DataManager {
 			
 			for (int i=0;i<pstm.length;i++) {
 				System.out.println();
-				String value=(String) pstm[i];
+				String value=pstm[i];
 				ps.setString(i,value);
 			}
 			System.out.println(ps);
