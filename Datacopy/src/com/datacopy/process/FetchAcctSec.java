@@ -1,6 +1,7 @@
 package com.datacopy.process;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 
 import com.datacopy.dao.DataManager;
 
@@ -50,6 +51,10 @@ public class FetchAcctSec extends DataCopy implements FetchTables {
 	@Override
 	public void processRad() {
 		ResultSet rs=dm.executeQueryByName("RAD", pstm);
+		
+		ResultSetMetaData rsmd = rs.getMetaData();
+		
+		
 		
 	}
 
