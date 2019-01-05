@@ -152,13 +152,19 @@ public class DataCopy {
 	
 	public String splitAcctId(String acctId) {
 		String[] accNo=acctId.split("-");
-		return accNo[2];
+		return accNo[3];
 		
 	}
 	
 	public String splitSecId(String secId) {
 		String[] secNo=secId.split("-");
 		return secNo[1];
+		
+	}
+
+	public void processDataCopy() {
+		// TODO Auto-generated method stub
+		processDataCopy();
 		
 	}
 

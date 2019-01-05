@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import com.datacopy.application.Main;
 import com.datacopy.application.PopUp;
+import com.datacopy.dao.DataManager;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,6 +35,7 @@ public class FrontController  implements Initializable {
 	
 	Main main = new Main();
 	PopUp popUp=new PopUp();
+	DataManager db = new DataManager();
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -44,10 +46,12 @@ public class FrontController  implements Initializable {
 	public void connectDatabase() {
 		connectdb.setDisable(true);
 		try {
-			ProgressBar pb = new ProgressBar();
-			pb.setProgress(0.5);
+			
 		boolean process=popUp.processPermission(username.getText(), password.getText(), portnumber.getText(), 
 				hostname.getText(), sid.getText());
+		if(process) {
+			db.connectDb(username.getText(), password.getText(), sid.getText(), hostname.getText(), portnumber.getText());
+		}
 	
 		
 		main.changeScene();
