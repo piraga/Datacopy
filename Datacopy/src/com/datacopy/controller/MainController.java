@@ -50,10 +50,10 @@ public class MainController implements Initializable {
 		secId = secid.getText();
 		textarea.setText("Welcomesckavkavnaljvnlasvnlasnas;ms;kcnas;kslkmsa;ck");
 		PopUp popUp = new PopUp();
-		DataCopy proc;
+		DataCopy proc = null;
 //		textarea.appendText("\"12364541");
 		try {
-//			textarea.appendText("\"12364541");
+			textarea.appendText("\"12364541");
 			isAcctSec=popUp.initialValidation(acctId, secId);
 //			textarea.appendText("\"12364541");
 			if(isAcctSec) {
@@ -73,7 +73,7 @@ public class MainController implements Initializable {
 		} catch (Exception e) {
 			System.out.println("Catch blocjk");
 		}
-		
+		proc.processDataCopy();
 		System.out.println(acctid.getText()+secid.getText());
 		if(sviRad.isSelected()) {
 			System.out.println("Sucess.....");
@@ -92,6 +92,10 @@ public class MainController implements Initializable {
 		}
 		
 		
+	}
+	
+	public void setText(String qeury) {
+		textarea.appendText(qeury);
 	}
 	
 

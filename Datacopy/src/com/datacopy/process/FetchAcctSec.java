@@ -2,6 +2,7 @@ package com.datacopy.process;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 
 import com.datacopy.dao.DataManager;
 
@@ -21,8 +22,8 @@ public class FetchAcctSec extends DataCopy implements FetchTables {
 		
 		super(sviRad, sviSeed, sviTrd, sviCli, accountMaster, secMaster, caAcctSec, caPayout, caTerms, caBroker, corpAct,
 				hpsMaster, hpsDetail, stepUp);
-		pstm[0]= acctId;
-		pstm[1]= secId;
+		pstm[0]= this.acctId =acctId;
+		pstm[1]= this.secId=secId;
 		pstmNo[0]=acctNo=splitAcctId(acctId);
 		pstmNo[1]=secNo=splitSecId(secId);
 		
@@ -50,9 +51,42 @@ public class FetchAcctSec extends DataCopy implements FetchTables {
 
 	@Override
 	public void processRad() {
-		ResultSet rs=dm.executeQueryByName("RAD", pstm);
 		
-		ResultSetMetaData rsmd = rs.getMetaData();
+		
+		try {
+			
+			System.out.println(acctId+"  "+secId+"  "+acctNo+"  "+secNo);
+			ResultSet rs=dm.executeQueryByName("RAD", pstmNo);
+			ResultSetMetaData rsmd = rs.getMetaData();
+			String query = "INSERT INTO SVI_RAD (";
+			
+			int columnCoun=rsmd.getColumnCount();
+			for(int i=1;i<=columnCoun;i++) {
+				
+				query+=rsmd.getColumnName(i) + ",";
+				String count = rsmd.getColumnName(i);
+			}
+			query=") VALUES(";
+			for(int i=1;i<=columnCoun;i++) {
+				query+="'";
+				if("DATE".equals(rsmd.getColumnTypeName(i))) {
+					query="to_date(+" + rs.getString(i)+"'"+ ",'MM/dd/yyyy')";
+				}else if("NUMBER".equals(rsmd.getColumnTypeName(i))){
+					query+=rs.getInt(i);
+				}else {
+					query+=rs.getString(i);
+				}
+				query+="'";
+			}
+			query+=")";
+			
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		

@@ -22,7 +22,7 @@ public class DataManager {
 	public void connectDb(String userName, String  passWord, String sid, String hostName, String port) {
 		popUp=new PopUp();
 		try {
-			Class.forName("oracle.jdbc.driver.oracleDriver");
+			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
 			con = DriverManager.getConnection("jdbc:oracle:thin:@"+hostName+":"+port+":"+sid,userName,passWord);
 			ProgressBar pb = new ProgressBar();
@@ -49,14 +49,14 @@ public class DataManager {
 			String sql = dm.getQuery(query);
 			
 			PreparedStatement ps = con.prepareStatement(sql);
-			
-			for (int i=0;i<pstm.length;i++) {
+			System.out.println(ps);
+			for (int i=1;i<=pstm.length;i++) {
 				System.out.println();
-				String value=pstm[i];
+				String value=pstm[i-1];
 				ps.setString(i,value);
 			}
 			System.out.println(ps);
-//			rs = ps.executeQuery();
+			rs = ps.executeQuery();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

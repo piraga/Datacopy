@@ -19,7 +19,7 @@ public class PopUp {
 		alert.setHeaderText("Make sure database credentials is correct ?");
 		alert.setContentText("Username="+uname+"\n"+"Password="+pass+"\n"+
 		"Port="+port+"\n"+"Hostname="+host+"\n"+"SID="+sid);
-		
+		alert.showAndWait();
 		return true;
 		
 	}
