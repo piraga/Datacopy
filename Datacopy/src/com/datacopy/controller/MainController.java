@@ -30,7 +30,7 @@ public class MainController implements Initializable {
 	@FXML
 	TextField acctid,secid;
 	@FXML
-	TextArea textarea;
+	TextArea textarea = new TextArea();
 	
 	private boolean isAcctSec;
 	private String acctId;
@@ -42,18 +42,20 @@ public class MainController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
+		acctid.setText("2-37-1-10074996");
+		secid.setText("2-2689615");
 	}
 	
 	public void fetchQueries() throws Exception {
 		Props p = new Props();
 		acctId=acctid.getText();
 		secId = secid.getText();
-		textarea.setText("Welcomesckavkavnaljvnlasvnlasnas;ms;kcnas;kslkmsa;ck");
+		textarea.setText("Welcome");
 		PopUp popUp = new PopUp();
 		DataCopy proc = null;
 //		textarea.appendText("\"12364541");
 		try {
-			textarea.appendText("\"12364541");
+//			textarea.appendText("\"12364541");
 			isAcctSec=popUp.initialValidation(acctId, secId);
 //			textarea.appendText("\"12364541");
 			if(isAcctSec) {
@@ -61,24 +63,20 @@ public class MainController implements Initializable {
 						sviCli.isSelected(), accountMaster.isSelected(), secMaster.isSelected(),
 						caAcctSec.isSelected(), caPayout.isSelected(), caTerms.isSelected(),
 						caBroker.isSelected(), corpAct.isSelected(),
-						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected());
+						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected(),textarea);
 			}else {
 				proc=new FetchAcct(acctId,sviRad.isSelected(), sviSeed.isSelected(), sviTrd.isSelected(),
 						sviCli.isSelected(), accountMaster.isSelected(), secMaster.isSelected(),
 						caAcctSec.isSelected(), caPayout.isSelected(), caTerms.isSelected(),
 						caBroker.isSelected(), corpAct.isSelected(),
-						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected());
+						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected(),textarea);
 			}
 			
 		} catch (Exception e) {
-			System.out.println("Catch blocjk");
+			System.out.println("Catch block");
 		}
 		proc.processDataCopy();
 		System.out.println(acctid.getText()+secid.getText());
-		if(sviRad.isSelected()) {
-			System.out.println("Sucess.....");
-			System.out.println(p.getProperties().getProperty("SEED"));
-		}
 		
 	}
 	
@@ -94,8 +92,14 @@ public class MainController implements Initializable {
 		
 	}
 	
-	public void setText(String qeury) {
-		textarea.appendText(qeury);
+	public void setTextDisplay(String qeury) {
+		
+		try {
+			textarea.setText(qeury);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 

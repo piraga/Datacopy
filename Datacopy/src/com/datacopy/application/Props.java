@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class Props {
 	
-	private static final String PropertiesPath = "Properties/datacopy.properties";
+	private static final String PropertiesPath = "Datacopy/Properties/datacopy.properties";
 
 
 	

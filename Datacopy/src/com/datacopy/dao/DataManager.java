@@ -25,9 +25,12 @@ public class DataManager {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
 			con = DriverManager.getConnection("jdbc:oracle:thin:@"+hostName+":"+port+":"+sid,userName,passWord);
+//			jdbc:oracle:thin:[USER/PASSWORD]@HOST:PORT:SID
+//			jdbc:oracle:thin:[USER/PASSWORD]@//HOST:PORT/SERVICE
+			
 			ProgressBar pb = new ProgressBar();
 			pb.setProgress(0.5);
-			
+			con.setAutoCommit(false);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -48,14 +51,26 @@ public class DataManager {
 			
 			String sql = dm.getQuery(query);
 			
+//			PreparedStatement ps = con.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE,
+//				    ResultSet.CONCUR_READ_ONLY);
 			PreparedStatement ps = con.prepareStatement(sql);
 			System.out.println(ps);
-			for (int i=1;i<=pstm.length;i++) {
-				System.out.println();
-				String value=pstm[i-1];
-				ps.setString(i,value);
+			if(query.contains("ACCOUNT_MASTER") || query.contains("_ACCT")) {
+				String value=pstm[0];
+				ps.setString(1,value);
+			}else if(query.contains("SEC_MASTER")){
+				String value=pstm[1];
+				ps.setString(1,value);
+			}else {
+				for (int i=1;i<=pstm.length;i++) {
+					System.out.println();
+					String value=pstm[i-1];
+					ps.setString(i,value);
+				}
 			}
-			System.out.println(ps);
+			
+			System.out.println(ps.toString());
+			
 			rs = ps.executeQuery();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
