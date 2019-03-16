@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<GridPane alignment="CENTER" gridLinesVisible="true" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.datacopy.controller.FrontController">
+<GridPane alignment="CENTER" gridLinesVisible="true" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.datacopy.controller.FrontController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
    </columnConstraints>
@@ -30,26 +32,31 @@
             </HBox>
             <HBox alignment="CENTER" spacing="10.0">
                <children>
-                  <VBox alignment="TOP_RIGHT" layoutY="3.0" spacing="30.0">
+                  <VBox alignment="TOP_RIGHT" layoutY="3.0">
                      <children>
-                        <Label alignment="TOP_RIGHT" layoutX="13.0" layoutY="3.0" text="Username">
+                        <Label alignment="TOP_RIGHT" layoutX="13.0" layoutY="3.0" prefHeight="20.0" prefWidth="76.0" text="Username">
                            <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              <Insets bottom="35.0" left="3.0" right="3.0" />
                            </padding>
                         </Label>
-                        <Label alignment="TOP_RIGHT" layoutX="8.0" layoutY="56.0" text="Password">
+                        <Label alignment="TOP_RIGHT" layoutX="8.0" layoutY="56.0" text="Password" textAlignment="CENTER">
                            <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              <Insets bottom="35.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
                         <Label alignment="TOP_RIGHT" layoutX="14.0" layoutY="113.0" text="Hostname">
                            <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              <Insets bottom="35.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
                         <Label alignment="TOP_RIGHT" layoutX="45.0" layoutY="162.0" text="Service ID">
                            <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              <Insets bottom="35.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Service name">
+                           <padding>
+                              <Insets bottom="35.0" />
                            </padding>
                         </Label>
                         <Label alignment="TOP_RIGHT" layoutY="212.0" text="Port Number">
@@ -59,8 +66,11 @@
                         </Label>
                      </children>
                      <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="3.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
+                     <opaqueInsets>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </opaqueInsets>
                   </VBox>
                   <VBox layoutX="104.0" spacing="30.0">
                      <children>
@@ -68,6 +78,7 @@
                         <TextField fx:id="password" layoutX="104.0" layoutY="56.0" promptText="Password" />
                         <TextField fx:id="hostname" layoutX="104.0" layoutY="108.0" promptText="Hostname" />
                         <TextField fx:id="sid" layoutX="104.0" layoutY="157.0" promptText="Service ID" />
+                        <TextField fx:id="sname" layoutX="104.0" promptText="Service name" />
                         <TextField fx:id="portnumber" layoutX="104.0" layoutY="211.0" promptText="Port Number" />
                      </children>
                   </VBox>
