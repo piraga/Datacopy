@@ -55,7 +55,7 @@ public class DataManager {
 //				    ResultSet.CONCUR_READ_ONLY);
 			PreparedStatement ps = con.prepareStatement(sql);
 			System.out.println(ps);
-			if(query.contains("ACCOUNT_MASTER") || query.contains("_ACCT")) {
+			if((query.contains("ACCOUNT_MASTER") || query.contains("_ACCT")) && !query.equals("CA_ACCT_SEC")) {
 				String value=pstm[0];
 				ps.setString(1,value);
 			}else if(query.contains("SEC_MASTER")){
