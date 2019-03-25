@@ -106,6 +106,28 @@ public class DataManager {
 			e.printStackTrace();
 		}
 	}
+
+	public void connectSnameDb(String userName, String  passWord, String sname, String hostName, String port) {
+		popUp=new PopUp();
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+			con = DriverManager.getConnection("jdbc:oracle:thin:@//"+hostName+":"+port+"/"+sname,userName,passWord);
+//			jdbc:oracle:thin:[USER/PASSWORD]@HOST:PORT:SID
+//			jdbc:oracle:thin:[USER/PASSWORD]@//HOST:PORT/SERVICE
+			
+			ProgressBar pb = new ProgressBar();
+			pb.setProgress(0.5);
+			con.setAutoCommit(false);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Please check connection");
+			popUp.connectionFail();
+		}
+		
+	}
 	
 //	public static void main(String ards[]) {
 //		DataManager dm = new DataManager();
