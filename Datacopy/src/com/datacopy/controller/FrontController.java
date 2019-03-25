@@ -31,6 +31,7 @@ public class FrontController  implements Initializable {
 	TextField sid = new TextField();
 	@FXML
 	TextField password = new TextField();
+	TextField sname = new TextField();
 	
 	
 	Main main = new Main();
@@ -52,10 +53,10 @@ public class FrontController  implements Initializable {
 		try {
 			
 		boolean process=popUp.processPermission(username.getText(), password.getText(), portnumber.getText(), 
-				hostname.getText(), sid.getText());
-		if(process) {
+				hostname.getText(), sid.getText(),sname.getText());
+		if(process && sname.getText().equalsIgnoreCase(null)) {
 			db.connectDb(username.getText(), password.getText(), sid.getText(), hostname.getText(), portnumber.getText());
-		}
+		}else if()
 	
 		
 		main.changeScene();

@@ -12,13 +12,13 @@ import javafx.scene.control.ChoiceDialog;
 public class PopUp {
 	
 	public Alert alert=null;
-	public boolean processPermission(String uname, String pass, String port, String host, String sid) {
+	public boolean processPermission(String uname, String pass, String port, String host, String sid,String sname) {
 		
 		alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmation Dialog");
 		alert.setHeaderText("Make sure database credentials is correct ?");
 		alert.setContentText("Username="+uname+"\n"+"Password="+pass+"\n"+
-		"Port="+port+"\n"+"Hostname="+host+"\n"+"SID="+sid);
+		"Port="+port+"\n"+"Hostname="+host+"\n"+"SID="+sid+"\n"+"ServiceName"+sname);
 		alert.showAndWait();
 		return true;
 		
