@@ -57,7 +57,7 @@ public class FrontController  implements Initializable {
 		if(process && sname.getText().equalsIgnoreCase(null)) {
 			db.connectDb(username.getText(), password.getText(), sid.getText(), hostname.getText(), portnumber.getText());
 		}else {
-			db.connectSnameDb(username.getText(), password.getText(), sname.getText(), hostname.getText(), portnumber.getText())
+			db.connectSnameDb(username.getText(), password.getText(), sname.getText(), hostname.getText(), portnumber.getText());
 		}
 	
 		
