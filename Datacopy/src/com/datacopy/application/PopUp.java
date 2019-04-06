@@ -18,7 +18,7 @@ public class PopUp {
 		alert.setTitle("Confirmation Dialog");
 		alert.setHeaderText("Make sure database credentials is correct ?");
 		alert.setContentText("Username="+uname+"\n"+"Password="+pass+"\n"+
-		"Port="+port+"\n"+"Hostname="+host+"\n"+"SID="+sid+"\n"+"ServiceName"+sname);
+		"Port="+port+"\n"+"Hostname="+host+"\n"+"SID="+sid+"\n"+"ServiceName="+sname);
 		alert.showAndWait();
 		return true;
 		
