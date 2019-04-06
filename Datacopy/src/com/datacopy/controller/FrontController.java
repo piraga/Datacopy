@@ -31,6 +31,7 @@ public class FrontController  implements Initializable {
 	TextField sid = new TextField();
 	@FXML
 	TextField password = new TextField();
+	@FXML
 	TextField sname = new TextField();
 	
 	
