@@ -44,17 +44,17 @@ public class FetchAcctSec extends DataCopy implements FetchTables {
 		if(isAccountMaster())
 		processAccountMaster();
 		if(isSecMaster())
-		processSecurityMaster();
-		if(isCaAcctSec())
-		processCaAcctSec();
-		if(isCaPayout())
-		processCorpActPayout();
-		if(isCaTerms())
-		processCorpActTerms();
-		if(isCaBroker())
-		processCorpActBroker();
+		processSecurityMaster();			
 		if(isCorpAct())
 		processCorpAct();
+		if(isCaBroker())
+		processCorpActBroker();
+		if(isCaTerms())
+		processCorpActTerms();
+		if(isCaPayout())
+		processCorpActPayout();
+		if(isCaAcctSec())
+		processCaAcctSec();
 		if(isHpsMaster())
 		processHpsMaster();
 		if(isHpsDetail())
