@@ -41,9 +41,9 @@ public class MainController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
-		acctid.setText("2-37-1-10074996");
-		secid.setText("2-2689615");
+//		
+//		acctid.setText("2-37-1-10074996");
+//		secid.setText("2-2689615");
 	}
 	
 	public void fetchQueries() throws Exception {
@@ -53,11 +53,8 @@ public class MainController implements Initializable {
 		textarea.setText("Welcome");
 		PopUp popUp = new PopUp();
 		DataCopy proc = null;
-//		textarea.appendText("\"12364541");
 		try {
-//			textarea.appendText("\"12364541");
 			isAcctSec=popUp.initialValidation(acctId, secId);
-//			textarea.appendText("\"12364541");
 			if(isAcctSec) {
 				proc=new FetchAcctSec(acctId,secId,sviRad.isSelected(), sviSeed.isSelected(), sviTrd.isSelected(),
 						sviCli.isSelected(), accountMaster.isSelected(), secMaster.isSelected(),
