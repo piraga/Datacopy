@@ -36,7 +36,7 @@ public class PopUp {
 		
 		List<String> process = new ArrayList<String>();
 		process.add("Account Security Wise");
-		process.add("Account Wise");
+//		process.add("Account Wise");
 		
 		ChoiceDialog<String> choice = new ChoiceDialog<String>("Account Security Wise",process);
 		choice.setTitle("Datacopy Choices");
