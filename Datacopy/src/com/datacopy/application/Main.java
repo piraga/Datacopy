@@ -29,7 +29,7 @@ public class Main extends Application {
 //			primaryStage.resizableProperty().setValue(Boolean.FALSE);//Disable maximize icon
 //			primaryStage.getIcons().add(new Image("file:Datacopy/logo.png"));
 			primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/logo.png")));
-			primaryStage.setTitle("LazyCopy");
+			primaryStage.setTitle("DataCopy");
 			primaryStage.setScene(new Scene(root));
 			
 			primaryStage.show();
