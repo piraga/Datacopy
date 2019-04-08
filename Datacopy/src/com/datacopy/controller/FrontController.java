@@ -42,11 +42,11 @@ public class FrontController  implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		sid.setFocusTraversable(false);// TO disable cursor from automatic pointing to text field
-		username.setText("vgi");
-		password.setText("VGI214");
-		hostname.setText("10.205.20.241");
-		portnumber.setText("1521");
-		sid.setText("omxcq01");
+//		username.setText("username");
+//		password.setText("Password");
+//		hostname.setText("Hostname");
+//		portnumber.setText("1521");
+//		sid.setText("SID");
 	}
 	
 	public void connectDatabase() {
