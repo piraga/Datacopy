@@ -187,15 +187,8 @@ public class DataCopy {
 				propName = propName+"_ACCT";
 				
 			}
-//			System.out.println(acctId+"  "+secId+"  "+acctNo+"  "+secNo);
 			ResultSet rs=dm.executeQueryByName(propName, pstmNo);
-//			rs.last(); 
-//			System.out.println("Count "+rs.getRow());
-//			while(rs.next()) {
-//				rowcount++;
-//			}
-//			ta.appendText("--Count"+rowcount+"\n");
-//			rs.beforeFirst();
+
 			ResultSetMetaData rsmd = rs.getMetaData();
 			String query = "INSERT INTO "+tableName +" (";
 			
@@ -214,9 +207,8 @@ public class DataCopy {
 			
 				for(int i=1;i<=columnCoun;i++) {
 					
-//				System.out.println(rsmd.getColumnTypeName(j));
+
 				String count = rsmd.getColumnName(j);
-//				System.out.println(count);
 				if("DATE".equals(rsmd.getColumnTypeName(j))) {
 					rs.getDate(j);
 					if ( rs.wasNull()) {
@@ -266,7 +258,6 @@ public class DataCopy {
 				System.out.println(query+" "+query1);
 				
 				ta.appendText(query+" "+query1+"\n");
-//				return query+" "+query1;
 				query1="";
 				
 			}
@@ -279,7 +270,6 @@ public class DataCopy {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		return query1;
 		
 	}
 	
