@@ -37,17 +37,17 @@ public class FetchAcct extends DataCopy implements FetchTables {
 			if(isAccountMaster())
 			processAccountMaster();
 			if(isSecMaster())
-			processSecurityMaster();
-			if(isCaAcctSec())
-			processCaAcctSec();
-			if(isCaPayout())
-			processCorpActPayout();
-			if(isCaTerms())
-			processCorpActTerms();
-			if(isCaBroker())
-			processCorpActBroker();
+			processSecurityMaster();			
 			if(isCorpAct())
 			processCorpAct();
+			if(isCaBroker())
+			processCorpActBroker();
+			if(isCaTerms())
+			processCorpActTerms();
+			if(isCaPayout())
+			processCorpActPayout();
+			if(isCaAcctSec())
+			processCaAcctSec();
 			if(isHpsMaster())
 			processHpsMaster();
 			if(isHpsDetail())
@@ -63,88 +63,6 @@ public class FetchAcct extends DataCopy implements FetchTables {
 	public void processRad() {
 		
 		queryProcess("SVI_RAD",pstmNo,false);
-		System.out.println("RAD \n");
-//		int j=1;
-//
-//		String query1 = "";
-//		try {
-//			
-//			System.out.println(acctId+"  "+secId+"  "+acctNo+"  "+secNo);
-//			ResultSet rs=dm.executeQueryByName("RAD", pstmNo);
-//			
-//			ResultSetMetaData rsmd = rs.getMetaData();
-//			String query = "INSERT INTO SVI_RAD (";
-//			
-//			int columnCoun=rsmd.getColumnCount();
-//			for(int i=1;i<=columnCoun;i++) {
-//				
-//				query+=rsmd.getColumnName(i) ;
-//				if(i!=columnCoun)
-//				{
-//					query+=",";
-//				}
-//				String count = rsmd.getColumnName(i);
-//			}
-//			query+=") VALUES(";
-//			while(rs.next()) {
-//			
-//				for(int i=1;i<=columnCoun;i++) {
-//					
-////				System.out.println(rsmd.getColumnTypeName(j));
-//				String count = rsmd.getColumnName(j);
-////				System.out.println(count);
-//				if("DATE".equals(rsmd.getColumnTypeName(j))) {
-//					rs.getDate(j);
-//					if ( rs.wasNull()) {
-//						query1+=null;
-//					}else {
-//						query1+="to_date('" + rs.getDate(j)+"','yyyy/mm/dd')";
-//					}
-//					
-//				}else if("NUMBER".equals(rsmd.getColumnTypeName(j))){
-//					rs.getInt(count);
-//					if ( rs.wasNull()) {
-//						query1+=null;
-//					}else {
-//						query1+="'";
-//						query1+=rs.getInt(count);
-//						query1+="'";
-//					}
-//					
-//				}else {
-//					rs.getString(count);
-//					if ( rs.wasNull()) {
-//						query1+=null;
-//					}else {
-//						query1+="'";
-//						query1+=rs.getString(count);
-//						query1+="'";
-//					}
-//					
-//				}
-//			
-//				
-//				if(i!=columnCoun )
-//				query1+=",";
-//				j++;
-//			}
-//				j=1;
-//				query1+=");";
-//				System.out.println(query+" "+query1);
-//				query1="";
-//				
-//			}
-			
-			
-			
-//			
-//			
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-		
 		
 	}
 
