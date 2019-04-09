@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import com.datacopy.application.Main;
 import com.datacopy.application.PopUp;
 import com.datacopy.dao.DataManager;
+import com.datacopy.process.TempFile;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,8 +34,16 @@ public class FrontController  implements Initializable {
 	TextField password = new TextField();
 	@FXML
 	TextField sname = new TextField();
+	@FXML
+	TextField dbName= new TextField();
+	@FXML
+	Button saveDetails;
+	@FXML
+	Button loadDetails;
+	@FXML
+	Button deleteDetails;
 	
-	
+	TempFile tempFile; 
 	Main main = new Main();
 	PopUp popUp=new PopUp();
 	DataManager db = new DataManager();
@@ -47,6 +56,7 @@ public class FrontController  implements Initializable {
 //		hostname.setText("Hostname");
 //		portnumber.setText("1521");
 //		sid.setText("SID");
+		this.tempFile = new TempFile(); 
 	}
 	
 	public void connectDatabase() {
@@ -70,6 +80,22 @@ public class FrontController  implements Initializable {
 		
 		System.out.println("Hai"+sid.getText()+username.getText()+password.getText()+hostname.getText()+portnumber.getText()+sid.getText());
 		connectdb.setDisable(false);
+	}
+	
+	
+	public void saveDetails() {
+		
+		tempFile.saveToProp(dbName.getText(),username.getText(), password.getText(), portnumber.getText(), 
+				hostname.getText(), sid.getText(),sname.getText());
+		
+	}
+	
+	public void loadDetails() {
+		
+	}
+
+	public void deleteDetails() {
+	
 	}
 	
 	

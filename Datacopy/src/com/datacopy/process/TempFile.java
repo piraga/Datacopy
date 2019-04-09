@@ -74,6 +74,18 @@ public class TempFile {
 		tf.getProperty();
 	}
 	
+	public void saveToProperties() {
+		
+	}
+
+	public void saveToProp(String dbName, String username, String password, String portnumber, String hostname, String sid,
+			String sname) {
+		// TODO Auto-generated method stub
+		
+		
+		
+	}
+	
 	
 	
 	
