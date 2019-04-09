@@ -2,6 +2,7 @@ package com.datacopy.process;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -13,9 +14,9 @@ public class TempFile {
 	private static String tmpDir = System.getProperty("java.io.tmpdir");
 	private static String userHome = System.getProperty("user.home");
 	private static String fileSeparator = System.getProperty("file.separator");
-	String DSI = "DatacopyDSI";
-	String fileDir=tmpDir+DSI.trim();
-	String fileName=fileDir+fileSeparator+"scidb.properties";
+	static String DSI = "DatacopyDSI";
+	static String fileDir=tmpDir+DSI.trim();
+	static String fileName=fileDir+fileSeparator+"scidb.properties";
 	public TempFile() {
 		createDirFile();
 	}
@@ -44,7 +45,7 @@ public class TempFile {
 				
 	}
 	
-	public Properties loadDbProp() {
+	public static Properties loadDbProp() {
 		
 		Properties prop	= new Properties();	
 		System.out.println("Prop"+fileName);
@@ -59,6 +60,14 @@ public class TempFile {
 		}
 		return prop;	
 	}
+	
+    public static void saveProperties(Properties p) throws IOException
+    {
+        FileOutputStream fr = new FileOutputStream(fileName);
+        p.store(fr, "Properties");
+        fr.close();
+        System.out.println("After saving properties: " + p);
+    }
 	
 	
 	public void getProperty() {

@@ -2,12 +2,17 @@ package com.datacopy.application;
 	
 import java.io.IOException;
 
+import com.datacopy.controller.FrontController;
+
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -19,6 +24,7 @@ public class Main extends Application {
 	
 	@FXML
 	 static Stage prev;
+
 	
 	Parent prevroot;
 	@Override
@@ -34,6 +40,9 @@ public class Main extends Application {
 			
 			primaryStage.show();
 			prev=primaryStage;
+			
+
+			
 			
 //			new Image("/Properties/Datacopy_icon.png")
 		} catch(Exception e) {
