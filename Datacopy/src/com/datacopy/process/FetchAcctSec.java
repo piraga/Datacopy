@@ -159,7 +159,7 @@ public class FetchAcctSec extends DataCopy implements FetchTables {
 	@Override
 	public void processStepUp() {
 		// TODO Auto-generated method stub
-		queryProcess("STEPUP_TRANSACTION",pstmNo,true);
+		queryProcess("STEPUP_TRANSACTIONS",pstmNo,true);
 		
 	}
 	
