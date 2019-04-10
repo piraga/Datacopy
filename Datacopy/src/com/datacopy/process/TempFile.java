@@ -14,8 +14,10 @@ public class TempFile {
 	private static String tmpDir = System.getProperty("java.io.tmpdir");
 	private static String userHome = System.getProperty("user.home");
 	private static String fileSeparator = System.getProperty("file.separator");
+	static String firstBack =tmpDir.substring(0, tmpDir.lastIndexOf(fileSeparator));
+    static String beforeTemp = firstBack.substring(0, firstBack.lastIndexOf(fileSeparator)+1);
 	static String DSI = "DatacopyDSI";
-	static String fileDir=tmpDir+DSI.trim();
+	static String fileDir=beforeTemp+DSI.trim();
 	static String fileName=fileDir+fileSeparator+"scidb.properties";
 	public TempFile() {
 		createDirFile();
@@ -23,7 +25,7 @@ public class TempFile {
 	
 	public void createDirFile() {
 		
-		System.out.println(tmpDir);
+		System.out.println(userHome);
 		System.out.println(userHome);
 		System.out.println(fileSeparator);		
 		File createDir = new File(fileDir);
