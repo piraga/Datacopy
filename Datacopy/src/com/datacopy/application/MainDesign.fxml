@@ -80,6 +80,11 @@
                                     <Bloom threshold="1.0" />
                                  </effect>
                               </CheckBox>
+                              <CheckBox fx:id="vpTransaction" layoutX="112.0" layoutY="246.0" mnemonicParsing="false" text="VP Transaction">
+                                 <effect>
+                                    <Bloom threshold="1.0" />
+                                 </effect>
+                              </CheckBox>
                               <CheckBox fx:id="accountMaster" layoutX="112.0" layoutY="276.0" mnemonicParsing="false" text="Account master">
                                  <effect>
                                     <Bloom threshold="1.0" />

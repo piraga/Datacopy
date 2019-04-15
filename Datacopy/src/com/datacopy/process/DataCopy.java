@@ -25,6 +25,7 @@ public class DataCopy {
 	private boolean hpsMaster;
 	private boolean hpsDetail;
 	private boolean stepUp;
+	private boolean vpTransaction;
 	private TextArea ta;
 	DataManager dm =  new DataManager();
 	MainController mc = new MainController();
@@ -32,7 +33,7 @@ public class DataCopy {
 	DataCopy(boolean sviRad,boolean sviSeed,boolean sviTrd,boolean sviCli,
 			boolean accountMaster,boolean secMaster,boolean caAcctSec,
 			boolean caPayout,boolean caTerms,boolean caBroker,
-			boolean corpAct,boolean hpsMaster,boolean hpsDetail,boolean stepUp,TextArea ta){
+			boolean corpAct,boolean hpsMaster,boolean hpsDetail,boolean stepUp,TextArea ta, boolean vpTransaction){
 		this.sviRad=sviRad;
 		this.sviSeed=sviSeed;
 		this.sviTrd=sviTrd;
@@ -48,9 +49,18 @@ public class DataCopy {
 		this.hpsDetail=hpsDetail;
 		this.stepUp=stepUp;
 		this.ta=ta;
+		this.vpTransaction=vpTransaction;
 		
 	}
 	
+	public boolean isVpTransaction() {
+		return vpTransaction;
+	}
+
+	public void setVpTransaction(boolean vpTransaction) {
+		this.vpTransaction = vpTransaction;
+	}
+
 	public boolean isSviRad() {
 		return sviRad;
 	}
@@ -240,7 +250,7 @@ public class DataCopy {
 //						query1+=null;
 //					}else {
 //						query1+="'";
-//						query1+=rs.getInt(count);
+//						query1+=rs.getInt(count); 
 //						query1+="'";
 //					}
 					
@@ -274,7 +284,7 @@ public class DataCopy {
 	}
 	
 	public boolean checkRawTable(String tableName) {
-		return tableName.equals("SVI_RAD")||tableName.equals("SVI_TRD")||tableName.equals("SVI_SEED");
+		return tableName.equals("SVI_RAD")||tableName.equals("SVI_TRD")||tableName.equals("SVI_SEED") || tableName.equals("SVI_CLI") ;
 	}
 
 	public void processDataCopy() {

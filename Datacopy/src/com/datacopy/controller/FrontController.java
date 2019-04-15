@@ -81,7 +81,7 @@ public class FrontController  implements Initializable {
 	
 	
 	
-	public void connectDatabase() {
+	public void connectDatabase() throws Exception {
 		connectdb.setDisable(true);
 		try {
 			
@@ -89,15 +89,18 @@ public class FrontController  implements Initializable {
 				hostname.getText(), sid.getText(),sname.getText());
 		if(process && sname.getText().equalsIgnoreCase("")) {
 			db.connectDb(username.getText(), password.getText(), sid.getText(), hostname.getText(), portnumber.getText());
-		}else {
+			main.changeScene();
+		}else if(process){
 			db.connectSnameDb(username.getText(), password.getText(), sname.getText(), hostname.getText(), portnumber.getText());
+			main.changeScene();
 		}
 	
 		
-		main.changeScene();
-		} catch (IOException e) {
+		
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Caught");
 		}
 		
 		System.out.println("Hai"+sid.getText()+username.getText()+password.getText()+hostname.getText()+portnumber.getText()+sid.getText());

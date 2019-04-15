@@ -26,7 +26,7 @@ public class MainController implements Initializable {
 	Button getQueries,goBack;
 	@FXML
 	CheckBox sviRad,sviSeed,sviTrd,sviCli,accountMaster,secMaster,caAcctSec,caPayout,caTerms,caBroker,
-	corpAct,hpsMaster,hpsDetail,stepUp;
+	corpAct,hpsMaster,hpsDetail,stepUp,vpTransaction;
 	@FXML
 	TextField acctid,secid;
 	@FXML
@@ -50,7 +50,7 @@ public class MainController implements Initializable {
 		Props p = new Props();
 		acctId=acctid.getText();
 		secId = secid.getText();
-		textarea.setText("Welcome");
+//		textarea.setText("Welcome");
 		PopUp popUp = new PopUp();
 		DataCopy proc = null;
 		try {
@@ -60,13 +60,13 @@ public class MainController implements Initializable {
 						sviCli.isSelected(), accountMaster.isSelected(), secMaster.isSelected(),
 						caAcctSec.isSelected(), caPayout.isSelected(), caTerms.isSelected(),
 						caBroker.isSelected(), corpAct.isSelected(),
-						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected(),textarea);
+						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected(),textarea,vpTransaction.isSelected());
 			}else {
 				proc=new FetchAcct(acctId,sviRad.isSelected(), sviSeed.isSelected(), sviTrd.isSelected(),
 						sviCli.isSelected(), accountMaster.isSelected(), secMaster.isSelected(),
 						caAcctSec.isSelected(), caPayout.isSelected(), caTerms.isSelected(),
 						caBroker.isSelected(), corpAct.isSelected(),
-						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected(),textarea);
+						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected(),textarea,vpTransaction.isSelected());
 			}
 			
 		} catch (Exception e) {

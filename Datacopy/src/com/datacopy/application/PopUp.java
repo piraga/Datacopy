@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 
 public class PopUp {
@@ -19,8 +20,13 @@ public class PopUp {
 		alert.setHeaderText("Make sure database credentials is correct ?");
 		alert.setContentText("Username="+uname+"\n"+"Password="+pass+"\n"+
 		"Port="+port+"\n"+"Hostname="+host+"\n"+"SID="+sid+"\n"+"ServiceName="+sname);
-		alert.showAndWait();
-		return true;
+		
+		 Optional<ButtonType> result = alert.showAndWait();
+		 if (result.isPresent() && result.get() == ButtonType.OK) {
+			 return true;
+		 }
+//		alert.showAndWait();
+		return false;
 		
 	}
 	
@@ -29,7 +35,7 @@ public class PopUp {
 		alert.setTitle("Connection Failed");
 		alert.setHeaderText("Please check database credentials");
 		alert.showAndWait();
-		System.exit(0);
+		
 	}
 	
 	public boolean isAcctSec() {

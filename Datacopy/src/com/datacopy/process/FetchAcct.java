@@ -13,10 +13,10 @@ public class FetchAcct extends DataCopy implements FetchTables {
 
 	public FetchAcct(String acctId, boolean sviRad, boolean sviSeed, boolean sviTrd, boolean sviCli, boolean accountMaster, boolean secMaster,
 			boolean caAcctSec, boolean caPayout, boolean caTerms, boolean caBroker, boolean corpAct, boolean hpsMaster,
-			boolean hpsDetail, boolean stepUp, TextArea ta) {
+			boolean hpsDetail, boolean stepUp, TextArea ta, boolean vpTransaction) {
 		
 		super(sviRad, sviSeed, sviTrd, sviCli, accountMaster, secMaster, caAcctSec, caPayout, caTerms, caBroker, corpAct,
-				hpsMaster, hpsDetail, stepUp, ta);
+				hpsMaster, hpsDetail, stepUp, ta, vpTransaction);
 		pstm[0]= this.acctId =acctId;
 //		pstm[1]= this.secId=secId;
 		pstmNo[0]=acctNo=splitAcctId(acctId);
@@ -27,34 +27,35 @@ public class FetchAcct extends DataCopy implements FetchTables {
 	public void processDataCopy() {
 
 			if(isSviRad())
-			processRad();
+				processRad();
 			if(isSviTrd())
-			processTrade();
+				processTrade();
 			if(isSviSeed())
-			processSeed();
+				processSeed();
 			if(isSviCli())
-			processCli();
+				processCli();
 			if(isAccountMaster())
-			processAccountMaster();
+				processAccountMaster();
 			if(isSecMaster())
-			processSecurityMaster();			
+				processSecurityMaster();			
 			if(isCorpAct())
-			processCorpAct();
+				processCorpAct();
 			if(isCaBroker())
-			processCorpActBroker();
+				processCorpActBroker();
 			if(isCaTerms())
-			processCorpActTerms();
+				processCorpActTerms();
 			if(isCaPayout())
-			processCorpActPayout();
+				processCorpActPayout();
 			if(isCaAcctSec())
-			processCaAcctSec();
+				processCaAcctSec();
 			if(isHpsMaster())
-			processHpsMaster();
+				processHpsMaster();
 			if(isHpsDetail())
-			processHpsDetail();
+				processHpsDetail();
 			if(isStepUp())
-			processStepUp();		
-			
+				processStepUp();		
+			if(isVpTransaction())
+				processVpTransaction();
 		
 		
 	}

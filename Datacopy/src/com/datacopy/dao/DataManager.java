@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.datacopy.application.Main;
 import com.datacopy.application.PopUp;
 import com.datacopy.application.Props;
 
@@ -19,7 +20,8 @@ public class DataManager {
 	
 	
 	
-	public void connectDb(String userName, String  passWord, String sid, String hostName, String port) {
+	
+	public void connectDb(String userName, String  passWord, String sid, String hostName, String port) throws Exception {
 		popUp=new PopUp();
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -37,6 +39,8 @@ public class DataManager {
 		} catch (Exception e) {
 			System.out.println("Please check connection");
 			popUp.connectionFail();
+			throw e;
+			
 		}
 		
 	}
@@ -107,7 +111,7 @@ public class DataManager {
 		}
 	}
 
-	public void connectSnameDb(String userName, String  passWord, String sname, String hostName, String port) {
+	public void connectSnameDb(String userName, String  passWord, String sname, String hostName, String port) throws Exception {
 		popUp=new PopUp();
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -125,6 +129,7 @@ public class DataManager {
 		} catch (Exception e) {
 			System.out.println("Please check connection");
 			popUp.connectionFail();
+			throw e;
 		}
 		
 	}
