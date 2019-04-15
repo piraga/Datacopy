@@ -158,5 +158,11 @@ public class FetchAcct extends DataCopy implements FetchTables {
 		
 	}
 
+	@Override
+	public void processVpTransaction() {
+		// TODO Auto-generated method stub
+		queryProcess("VP_TRANSACTION",pstm,false);
+	}
+
 
 }
