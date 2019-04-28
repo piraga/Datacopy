@@ -27,13 +27,15 @@ public class DataCopy {
 	private boolean stepUp;
 	private boolean vpTransaction;
 	private TextArea ta;
+	private boolean sqlFile;
 	DataManager dm =  new DataManager();
 	MainController mc = new MainController();
+	ExportFile ef;
 	
-	DataCopy(boolean sviRad,boolean sviSeed,boolean sviTrd,boolean sviCli,
+	DataCopy(String acctId, String secId,boolean sviRad,boolean sviSeed,boolean sviTrd,boolean sviCli,
 			boolean accountMaster,boolean secMaster,boolean caAcctSec,
 			boolean caPayout,boolean caTerms,boolean caBroker,
-			boolean corpAct,boolean hpsMaster,boolean hpsDetail,boolean stepUp,TextArea ta, boolean vpTransaction){
+			boolean corpAct,boolean hpsMaster,boolean hpsDetail,boolean stepUp,TextArea ta, boolean vpTransaction, boolean sqlFile){
 		this.sviRad=sviRad;
 		this.sviSeed=sviSeed;
 		this.sviTrd=sviTrd;
@@ -50,6 +52,9 @@ public class DataCopy {
 		this.stepUp=stepUp;
 		this.ta=ta;
 		this.vpTransaction=vpTransaction;
+		this.ta.clear();
+		this.sqlFile=sqlFile;
+		ef = new ExportFile(acctId,secId);
 		
 	}
 	
@@ -185,11 +190,53 @@ public class DataCopy {
 		
 	}
 	
+	public void getDeleteQueries(String tableName, String[] pstmNo, String[] pstm) {
+		
+		
+		String query = "DELETE  "+tableName+" WHERE ";
+		
+		if(checkAcctNoSecNoTable(tableName)) {
+			query += "ACCT_NO =\""+pstmNo[0]+"\"AND SEC_NO =\""+pstmNo[1]+"\";";
+		}else if(tableName.equals("ACCOUNT_MASTER")) {
+			query += "ACCT_NO =\""+pstmNo[0]+"\";";
+			
+		}else if(tableName.equals("SEC_MASTER")) {
+			query +="SEC_NO=\""+pstmNo[1]+"\";";
+		}else if(checkAcctIdSecIdTable(tableName)) {
+			query += "ACCOUNT_ID =\""+pstm[0]+" AND SECURITY_ID=\""+pstm[0]+"\";";
+		}
+		else if (checkCATables(tableName)) {
+			query += "CA_ID IN (SELECT DISTINCT CA_ID FROM CA_ACCT_SEC WHERE ACCOUNT_ID =\""+pstm[0]+"\" AND SECURITY_ID=\""+pstm[0]+"\");";
+		}
+		
+		ta.appendText(query+"\n");
+		
+		
+	}
+	
+	private boolean checkAcctIdSecIdTable(String tableName) {
+		// TODO Auto-generated method stub
+		return tableName.equals("CA_ACCT_SEC")||tableName.equals("VP_TRANSACTION");
+	}
+
+	private boolean checkCATables(String tableName) {
+		// TODO Auto-generated method stub
+		return tableName.equals("CORP_ACT_PAYOUT")||tableName.equals("CORP_ACT_TERMS")||tableName.equals("CORP_ACT_BROKER") || tableName.equals("CORP_ACT");
+	}
+
+	private boolean checkAcctNoSecNoTable(String tableName) {
+		// TODO Auto-generated method stub
+		return tableName.equals("STEPUP_TRANSACTIONS")||tableName.equals("FIP_HPS_DETAIL")||tableName.equals("FIP_HPS_MASTER") || tableName.equals("SVI_RAD")||tableName.equals("SVI_TRD")||tableName.equals("SVI_SEED") || tableName.equals("SVI_CLI")  ;
+	}
+
 	public void queryProcess(String tableName, String[] pstmNo,boolean acctSecCheck) {
 		int j=1;
 		int rowcount=1;
-		ta.appendText("REM INSERTING into "+tableName +"\n" + 
-				"SET DEFINE OFF; \n");
+		if(!sqlFile) {
+			ta.appendText("REM INSERTING into "+tableName +"\n" + 
+					"SET DEFINE OFF; \n");
+		}
+		
 		String query1 = "";
 		String propName=tableName;
 		try {
@@ -266,13 +313,22 @@ public class DataCopy {
 				j=1;
 				query1+=");";
 				System.out.println(query+" "+query1);
+				if(!sqlFile) {
+					ta.appendText(query+" "+query1+"\n");
+				}else {
+					ef.FileWriter(query+" "+query1+"\n");
+				}
 				
-				ta.appendText(query+" "+query1+"\n");
+				
 				query1="";
 				
 			}
-			
-			ta.appendText("\n\n");	
+			if(!sqlFile) {
+				ta.appendText("\n\n");
+			}else {
+				ef.FileWriter("\n\n");
+			}
+				
 			
 			
 			
@@ -289,8 +345,13 @@ public class DataCopy {
 
 	public void processDataCopy() {
 		// TODO Auto-generated method stub
+		System.out.println("Parent DC");
 		processDataCopy();		
 		DataManager.disconnectDb();
+	}
+	
+	public void getDeleteQueries() {
+		getDeleteQueries();
 	}
 
 }

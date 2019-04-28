@@ -61,7 +61,7 @@ public class FrontController  implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		sid.setFocusTraversable(false);// TO disable cursor from automatic pointing to text field
+//		sid.setFocusTraversable(false);// TO disable cursor from automatic pointing to text field
 //		username.setText("username");
 //		password.setText("Password");
 //		hostname.setText("Hostname");
@@ -85,15 +85,15 @@ public class FrontController  implements Initializable {
 		connectdb.setDisable(true);
 		try {
 			
-		boolean process=popUp.processPermission(username.getText(), password.getText(), portnumber.getText(), 
-				hostname.getText(), sid.getText(),sname.getText());
-		if(process && sname.getText().equalsIgnoreCase("")) {
-			db.connectDb(username.getText(), password.getText(), sid.getText(), hostname.getText(), portnumber.getText());
+//		boolean process=popUp.processPermission(username.getText(), password.getText(), portnumber.getText(), 
+//				hostname.getText(), sid.getText(),sname.getText());
+//		if(process && sname.getText().equalsIgnoreCase("")) {
+//			db.connectDb(username.getText(), password.getText(), sid.getText(), hostname.getText(), portnumber.getText());
+//			main.changeScene();
+//		}else if(process){
+//			db.connectSnameDb(username.getText(), password.getText(), sname.getText(), hostname.getText(), portnumber.getText());
 			main.changeScene();
-		}else if(process){
-			db.connectSnameDb(username.getText(), password.getText(), sname.getText(), hostname.getText(), portnumber.getText());
-			main.changeScene();
-		}
+//		}
 	
 		
 		

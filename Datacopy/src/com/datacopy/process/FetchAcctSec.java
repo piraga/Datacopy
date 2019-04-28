@@ -20,10 +20,10 @@ public class FetchAcctSec extends DataCopy implements FetchTables {
 	DataManager dm = new DataManager();
 	public FetchAcctSec(String acctId, String secId, boolean sviRad, boolean sviSeed, boolean sviTrd, boolean sviCli, boolean accountMaster,
 			boolean secMaster, boolean caAcctSec, boolean caPayout, boolean caTerms, boolean caBroker, boolean corpAct,
-			boolean hpsMaster, boolean hpsDetail, boolean stepUp, TextArea ta, boolean vpTransaction) {
+			boolean hpsMaster, boolean hpsDetail, boolean stepUp, TextArea ta, boolean vpTransaction, boolean sqlFile) {
 		
-		super(sviRad, sviSeed, sviTrd, sviCli, accountMaster, secMaster, caAcctSec, caPayout, caTerms, caBroker, corpAct,
-				hpsMaster, hpsDetail, stepUp,ta,vpTransaction);
+		super(acctId,secId,sviRad, sviSeed, sviTrd, sviCli, accountMaster, secMaster, caAcctSec, caPayout, caTerms, caBroker, corpAct,
+				hpsMaster, hpsDetail, stepUp,ta,vpTransaction, sqlFile);
 		pstm[0]= this.acctId =acctId;
 		pstm[1]= this.secId=secId;
 		pstmNo[0]=acctNo=splitAcctId(acctId);
@@ -44,7 +44,9 @@ public class FetchAcctSec extends DataCopy implements FetchTables {
 		if(isAccountMaster())
 			processAccountMaster();
 		if(isSecMaster())
-			processSecurityMaster();			
+			processSecurityMaster();
+		if(isVpTransaction())
+			processVpTransaction();
 		if(isCorpAct())
 			processCorpAct();
 		if(isCaBroker())
@@ -61,8 +63,7 @@ public class FetchAcctSec extends DataCopy implements FetchTables {
 			processHpsDetail();
 		if(isStepUp())
 			processStepUp();
-		if(isVpTransaction())
-			processVpTransaction();
+		
 			
 		
 	}

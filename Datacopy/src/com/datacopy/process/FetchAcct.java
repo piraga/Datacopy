@@ -11,12 +11,12 @@ public class FetchAcct extends DataCopy implements FetchTables {
 	private String acctNo;
 	private String secNo;
 
-	public FetchAcct(String acctId, boolean sviRad, boolean sviSeed, boolean sviTrd, boolean sviCli, boolean accountMaster, boolean secMaster,
+	public FetchAcct(String acctId, String secId, boolean sviRad, boolean sviSeed, boolean sviTrd, boolean sviCli, boolean accountMaster, boolean secMaster,
 			boolean caAcctSec, boolean caPayout, boolean caTerms, boolean caBroker, boolean corpAct, boolean hpsMaster,
-			boolean hpsDetail, boolean stepUp, TextArea ta, boolean vpTransaction) {
+			boolean hpsDetail, boolean stepUp, TextArea ta, boolean vpTransaction, boolean sqlFile) {
 		
-		super(sviRad, sviSeed, sviTrd, sviCli, accountMaster, secMaster, caAcctSec, caPayout, caTerms, caBroker, corpAct,
-				hpsMaster, hpsDetail, stepUp, ta, vpTransaction);
+		super(acctId, secId,sviRad, sviSeed, sviTrd, sviCli, accountMaster, secMaster, caAcctSec, caPayout, caTerms, caBroker, corpAct,
+				hpsMaster, hpsDetail, stepUp, ta, vpTransaction, sqlFile);
 		pstm[0]= this.acctId =acctId;
 //		pstm[1]= this.secId=secId;
 		pstmNo[0]=acctNo=splitAcctId(acctId);
@@ -26,36 +26,36 @@ public class FetchAcct extends DataCopy implements FetchTables {
 	@Override
 	public void processDataCopy() {
 
-			if(isSviRad())
-				processRad();
-			if(isSviTrd())
-				processTrade();
-			if(isSviSeed())
-				processSeed();
-			if(isSviCli())
-				processCli();
-			if(isAccountMaster())
-				processAccountMaster();
-			if(isSecMaster())
-				processSecurityMaster();			
-			if(isCorpAct())
-				processCorpAct();
-			if(isCaBroker())
-				processCorpActBroker();
-			if(isCaTerms())
-				processCorpActTerms();
-			if(isCaPayout())
-				processCorpActPayout();
-			if(isCaAcctSec())
-				processCaAcctSec();
-			if(isHpsMaster())
-				processHpsMaster();
-			if(isHpsDetail())
-				processHpsDetail();
-			if(isStepUp())
-				processStepUp();		
-			if(isVpTransaction())
-				processVpTransaction();
+		if(isSviRad())
+			processRad();
+		if(isSviTrd())
+			processTrade();
+		if(isSviSeed())
+			processSeed();
+		if(isSviCli())
+			processCli();
+		if(isAccountMaster())
+			processAccountMaster();
+		if(isSecMaster())
+			processSecurityMaster();
+		if(isVpTransaction())
+			processVpTransaction();
+		if(isCorpAct())
+			processCorpAct();
+		if(isCaBroker())
+			processCorpActBroker();
+		if(isCaTerms())
+			processCorpActTerms();
+		if(isCaPayout())
+			processCorpActPayout();
+		if(isCaAcctSec())
+			processCaAcctSec();
+		if(isHpsMaster())
+			processHpsMaster();
+		if(isHpsDetail())
+			processHpsDetail();
+		if(isStepUp())
+			processStepUp();
 		
 		
 	}
