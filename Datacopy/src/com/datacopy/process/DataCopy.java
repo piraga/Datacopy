@@ -54,6 +54,7 @@ public class DataCopy {
 		this.vpTransaction=vpTransaction;
 		this.ta.clear();
 		this.sqlFile=sqlFile;
+		if(!(this instanceof DeleteProcess))
 		ef = new ExportFile(acctId,secId);
 		
 	}
