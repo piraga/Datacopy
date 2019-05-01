@@ -85,15 +85,15 @@ public class FrontController  implements Initializable {
 		connectdb.setDisable(true);
 		try {
 			
-//		boolean process=popUp.processPermission(username.getText(), password.getText(), portnumber.getText(), 
-//				hostname.getText(), sid.getText(),sname.getText());
-//		if(process && sname.getText().equalsIgnoreCase("")) {
-//			db.connectDb(username.getText(), password.getText(), sid.getText(), hostname.getText(), portnumber.getText());
-//			main.changeScene();
-//		}else if(process){
-//			db.connectSnameDb(username.getText(), password.getText(), sname.getText(), hostname.getText(), portnumber.getText());
+		boolean process=popUp.processPermission(username.getText(), password.getText(), portnumber.getText(), 
+				hostname.getText(), sid.getText(),sname.getText());
+		if(process && sname.getText().equalsIgnoreCase("")) {
+			db.connectDb(username.getText(), password.getText(), sid.getText(), hostname.getText(), portnumber.getText());
 			main.changeScene();
-//		}
+		}else if(process){
+			db.connectSnameDb(username.getText(), password.getText(), sname.getText(), hostname.getText(), portnumber.getText());
+			main.changeScene();
+		}
 	
 		
 		
