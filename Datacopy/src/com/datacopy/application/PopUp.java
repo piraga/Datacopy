@@ -40,8 +40,8 @@ public class PopUp {
 	
 	public void exportPopUp(String location) {
 		alert= new Alert (AlertType.INFORMATION);
-		alert.setTitle("File Location: "+location);
-		alert.setHeaderText("ExportFile Loaction");
+		alert.setTitle("ExportFile Loaction");
+		alert.setHeaderText("File Location: "+location);
 		alert.showAndWait();
 	}
 	
