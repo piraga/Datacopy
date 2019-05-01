@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 
+import com.datacopy.application.PopUp;
+
 public class ExportFile {
 	
 //	private static String tmpDir = System.getProperty("java.io.tmpdir");
@@ -19,12 +21,14 @@ public class ExportFile {
 	String acctId;
 	String secID;
 	FileWriter fw;
+	PopUp pu = new PopUp();
 	
 	public ExportFile(String acctId,String secId) {
 		this.acctId=acctId;
 		this.secID=secId;
 		this.fileName=fileDir+fileSeparator+"exports"+acctId+"_"+secId+".sql";
 		createSqlFile();
+		
 		  
 		
 	}
@@ -52,6 +56,7 @@ public class ExportFile {
 		try {
 			fw.write("COMMIT;");
 			fw.close();
+			pu.exportPopUp(fileName);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
