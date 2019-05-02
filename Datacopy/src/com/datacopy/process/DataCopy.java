@@ -197,17 +197,17 @@ public class DataCopy {
 		String query = "DELETE  "+tableName+" WHERE ";
 		
 		if(checkAcctNoSecNoTable(tableName)) {
-			query += "ACCT_NO =\""+pstmNo[0]+"\"AND SEC_NO =\""+pstmNo[1]+"\";";
+			query += "ACCT_NO =\'"+pstmNo[0]+"\'AND SEC_NO =\'"+pstmNo[1]+"\';";
 		}else if(tableName.equals("ACCOUNT_MASTER")) {
-			query += "ACCT_NO =\""+pstmNo[0]+"\";";
+			query += "ACCT_NO =\'"+pstmNo[0]+"\';";
 			
 		}else if(tableName.equals("SEC_MASTER")) {
-			query +="SEC_NO=\""+pstmNo[1]+"\";";
+			query +="SEC_NO=\'"+pstmNo[1]+"\';";
 		}else if(checkAcctIdSecIdTable(tableName)) {
-			query += "ACCOUNT_ID =\""+pstm[0]+" AND SECURITY_ID=\""+pstm[0]+"\";";
+			query += "ACCOUNT_ID =\'"+pstm[0]+"\' AND SECURITY_ID=\'"+pstm[0]+"\';";
 		}
 		else if (checkCATables(tableName)) {
-			query += "CA_ID IN (SELECT DISTINCT CA_ID FROM CA_ACCT_SEC WHERE ACCOUNT_ID =\""+pstm[0]+"\" AND SECURITY_ID=\""+pstm[0]+"\");";
+			query += "CA_ID IN (SELECT DISTINCT CA_ID FROM CA_ACCT_SEC WHERE ACCOUNT_ID =\'"+pstm[0]+"\' AND SECURITY_ID=\'"+pstm[0]+"\');";
 		}
 		
 		ta.appendText(query+"\n");

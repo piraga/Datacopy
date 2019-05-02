@@ -95,19 +95,19 @@ public class MainController implements Initializable {
 		DataCopy proc = null;
 		try {
 //			isAcctSec=popUp.initialValidation(acctId, secId);
-			if(isAcctSec) {
+//			if(isAcctSec) {
 				proc=new FetchAcctSec(acctId,secId,sviRad.isSelected(), sviSeed.isSelected(), sviTrd.isSelected(),
 						sviCli.isSelected(), accountMaster.isSelected(), secMaster.isSelected(),
 						caAcctSec.isSelected(), caPayout.isSelected(), caTerms.isSelected(),
 						caBroker.isSelected(), corpAct.isSelected(),
 						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected(),textarea,vpTransaction.isSelected(),false);
-			}else {
-				proc=new FetchAcct(acctId,secId,sviRad.isSelected(), sviSeed.isSelected(), sviTrd.isSelected(),
-						sviCli.isSelected(), accountMaster.isSelected(), secMaster.isSelected(),
-						caAcctSec.isSelected(), caPayout.isSelected(), caTerms.isSelected(),
-						caBroker.isSelected(), corpAct.isSelected(),
-						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected(),textarea,vpTransaction.isSelected(),false);
-			}
+//			}else {   ***ACCOUNT_LEVEL_PROCESS**
+//				proc=new FetchAcct(acctId,secId,sviRad.isSelected(), sviSeed.isSelected(), sviTrd.isSelected(),
+//						sviCli.isSelected(), accountMaster.isSelected(), secMaster.isSelected(),
+//						caAcctSec.isSelected(), caPayout.isSelected(), caTerms.isSelected(),
+//						caBroker.isSelected(), corpAct.isSelected(),
+//						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected(),textarea,vpTransaction.isSelected(),false);
+//			}
 			
 		} catch (Exception e) {
 			System.out.println("Catch block");
@@ -139,19 +139,19 @@ public class MainController implements Initializable {
 		DataCopy proc = null;
 		try {
 //			isAcctSec=popUp.initialValidation(acctId, secId);
-			if(isAcctSec) {
+//			if(isAcctSec) {
 				proc=new FetchAcctSec(acctId,secId,sviRad.isSelected(), sviSeed.isSelected(), sviTrd.isSelected(),
 						sviCli.isSelected(), accountMaster.isSelected(), secMaster.isSelected(),
 						caAcctSec.isSelected(), caPayout.isSelected(), caTerms.isSelected(),
 						caBroker.isSelected(), corpAct.isSelected(),
 						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected(),textarea,vpTransaction.isSelected(),true);
-			}else {
-				proc=new FetchAcct(acctId,secId,sviRad.isSelected(), sviSeed.isSelected(), sviTrd.isSelected(),
-						sviCli.isSelected(), accountMaster.isSelected(), secMaster.isSelected(),
-						caAcctSec.isSelected(), caPayout.isSelected(), caTerms.isSelected(),
-						caBroker.isSelected(), corpAct.isSelected(),
-						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected(),textarea,vpTransaction.isSelected(),true);
-			}
+//			}else {
+//				proc=new FetchAcct(acctId,secId,sviRad.isSelected(), sviSeed.isSelected(), sviTrd.isSelected(),
+//						sviCli.isSelected(), accountMaster.isSelected(), secMaster.isSelected(),
+//						caAcctSec.isSelected(), caPayout.isSelected(), caTerms.isSelected(),
+//						caBroker.isSelected(), corpAct.isSelected(),
+//						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected(),textarea,vpTransaction.isSelected(),true);
+//			}
 			
 		} catch (Exception e) {
 			System.out.println("Catch block");
