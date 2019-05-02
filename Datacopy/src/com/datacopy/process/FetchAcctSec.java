@@ -64,6 +64,8 @@ public class FetchAcctSec extends DataCopy implements FetchTables {
 		if(isStepUp())
 			processStepUp();
 		
+		ef.FileWriterClose();
+		
 			
 		
 	}

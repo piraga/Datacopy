@@ -45,8 +45,8 @@ public class MainController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 //		
-		acctid.setText("2-37-1-10074996");
-		secid.setText("2-2689615");
+		acctid.setText("2-37-1-37415653");
+		secid.setText("2-2684553");
 		
 		
 		EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() { 
@@ -93,6 +93,8 @@ public class MainController implements Initializable {
 //		textarea.setText("Welcome");
 		PopUp popUp = new PopUp();
 		DataCopy proc = null;
+		
+		
 		try {
 //			isAcctSec=popUp.initialValidation(acctId, secId);
 //			if(isAcctSec) {
@@ -108,6 +110,9 @@ public class MainController implements Initializable {
 //						caBroker.isSelected(), corpAct.isSelected(),
 //						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected(),textarea,vpTransaction.isSelected(),false);
 //			}
+//				Thread t1 = new Thread(proc);
+//				t1.start();
+//				t1.join();
 			
 		} catch (Exception e) {
 			System.out.println("Catch block");

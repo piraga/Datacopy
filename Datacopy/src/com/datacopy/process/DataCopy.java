@@ -9,7 +9,7 @@ import com.datacopy.dao.DataManager;
 
 import javafx.scene.control.TextArea;
 
-public class DataCopy {
+public class DataCopy extends Thread {
 	
 	private boolean sviRad;
 	private boolean sviSeed;
@@ -54,7 +54,7 @@ public class DataCopy {
 		this.vpTransaction=vpTransaction;
 		this.ta.clear();
 		this.sqlFile=sqlFile;
-//		if(!(this instanceof DeleteProcess))
+		if(!(this instanceof DeleteProcess))
 		ef = new ExportFile(acctId,secId);
 		
 	}
@@ -342,6 +342,10 @@ public class DataCopy {
 	
 	public boolean checkRawTable(String tableName) {
 		return tableName.equals("SVI_RAD")||tableName.equals("SVI_TRD")||tableName.equals("SVI_SEED") || tableName.equals("SVI_CLI") ;
+	}
+	
+	public void run() {
+		processDataCopy();
 	}
 
 	public void processDataCopy() {

@@ -85,6 +85,7 @@ public class ExportFile {
 			}
 			
 		}
+		fw= getFileWriter();
 				
 	}
 
