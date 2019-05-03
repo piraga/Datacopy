@@ -75,7 +75,8 @@ public class ExportFile {
 			createDir.mkdir();
 			System.out.println("DONE");
 		}
-		createFile.deleteOnExit();
+//		createFile.deleteOnExit();
+		System.out.println("Deleteeeeeeeeeeeeeeeeeeee");
 		if(!createFile.exists()) {
 			try {
 				createFile.createNewFile();

@@ -45,22 +45,11 @@ public class MainController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 //		
-		acctid.setText("2-37-1-37415653");
-		secid.setText("2-2684553");
+//		acctid.setText("2-37-1-37415653");
+//		secid.setText("2-2684553");
 		
 		
-		EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() { 
-			  
-            public void handle(ActionEvent e) 
-            { 
-                if (sviRad.isSelected()) 
-                    System.out.println("Selected");
-                else
-                	System.out.println(" not selected "); 
-            } 
 
-        };
-	}
 	
 	public void selectAll() {
 		
