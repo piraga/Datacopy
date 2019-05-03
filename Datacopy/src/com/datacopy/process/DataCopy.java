@@ -203,7 +203,9 @@ public class DataCopy extends Thread {
 			
 		}else if(tableName.equals("SEC_MASTER")) {
 			query +="SEC_NO=\'"+pstmNo[1]+"\';";
-		}else if(checkAcctIdSecIdTable(tableName)) {
+		}else if(tableName.equals("VP_TRANSACTION")) {
+			query += "ACCT_ID =\'"+pstm[0]+"\' AND SECURITY_ID=\'"+pstm[0]+"\';";
+		}		else if(checkAcctIdSecIdTable(tableName)) {
 			query += "ACCOUNT_ID =\'"+pstm[0]+"\' AND SECURITY_ID=\'"+pstm[0]+"\';";
 		}
 		else if (checkCATables(tableName)) {
@@ -217,7 +219,7 @@ public class DataCopy extends Thread {
 	
 	private boolean checkAcctIdSecIdTable(String tableName) {
 		// TODO Auto-generated method stub
-		return tableName.equals("CA_ACCT_SEC")||tableName.equals("VP_TRANSACTION");
+		return tableName.equals("CA_ACCT_SEC");
 	}
 
 	private boolean checkCATables(String tableName) {
