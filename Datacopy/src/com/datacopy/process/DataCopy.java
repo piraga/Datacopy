@@ -54,7 +54,7 @@ public class DataCopy extends Thread {
 		this.vpTransaction=vpTransaction;
 		this.ta.clear();
 		this.sqlFile=sqlFile;
-		if(!(this instanceof DeleteProcess))
+		if(sqlFile)
 		ef = new ExportFile(acctId,secId);
 		
 	}
