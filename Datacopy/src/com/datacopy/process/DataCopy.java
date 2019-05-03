@@ -204,12 +204,12 @@ public class DataCopy extends Thread {
 		}else if(tableName.equals("SEC_MASTER")) {
 			query +="SEC_NO=\'"+pstmNo[1]+"\';";
 		}else if(tableName.equals("VP_TRANSACTION")) {
-			query += "ACCT_ID =\'"+pstm[0]+"\' AND SECURITY_ID=\'"+pstm[0]+"\';";
+			query += "ACCT_ID =\'"+pstm[0]+"\' AND SECURITY_ID=\'"+pstm[1]+"\';";
 		}		else if(checkAcctIdSecIdTable(tableName)) {
-			query += "ACCOUNT_ID =\'"+pstm[0]+"\' AND SECURITY_ID=\'"+pstm[0]+"\';";
+			query += "ACCOUNT_ID =\'"+pstm[0]+"\' AND SECURITY_ID=\'"+pstm[1]+"\';";
 		}
 		else if (checkCATables(tableName)) {
-			query += "CA_ID IN (SELECT DISTINCT CA_ID FROM CA_ACCT_SEC WHERE ACCOUNT_ID =\'"+pstm[0]+"\' AND SECURITY_ID=\'"+pstm[0]+"\');";
+			query += "CA_ID IN (SELECT DISTINCT CA_ID FROM CA_ACCT_SEC WHERE ACCOUNT_ID =\'"+pstm[0]+"\' AND SECURITY_ID=\'"+pstm[1]+"\');";
 		}
 		
 		ta.appendText(query+"\n");
