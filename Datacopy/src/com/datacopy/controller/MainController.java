@@ -107,7 +107,9 @@ public class MainController implements Initializable {
 		} catch (Exception e) {
 			System.out.println("Catch block");
 		}
+		disableButton();
 		proc.processDataCopy();
+		enableButton();
 		System.out.println(acctid.getText()+secid.getText());
 		
 	}
@@ -115,6 +117,7 @@ public class MainController implements Initializable {
 	public void goBack() {
 		
 		try {
+			
 			main.goPrevious();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -147,17 +150,21 @@ public class MainController implements Initializable {
 //						caBroker.isSelected(), corpAct.isSelected(),
 //						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected(),textarea,vpTransaction.isSelected(),true);
 //			}
+				
 			
 		} catch (Exception e) {
 			System.out.println("Catch block");
 		}
+		disableButton();
 		proc.processDataCopy();
+		enableButton();
 		System.out.println(acctid.getText()+secid.getText());
 		
 	}
 	
 	public void getDeleteQueries() {
-
+		
+		disableButton();
 		
 		DataCopy proc=new DeleteProcess(acctid.getText(),secid.getText(),sviRad.isSelected(), sviSeed.isSelected(), sviTrd.isSelected(),
 				sviCli.isSelected(), accountMaster.isSelected(), secMaster.isSelected(),
@@ -165,6 +172,8 @@ public class MainController implements Initializable {
 				caBroker.isSelected(), corpAct.isSelected(),
 				hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected(),textarea,vpTransaction.isSelected(),false);
 		proc.getDeleteQueries();
+		
+		enableButton();
 		
 	}
 	public void setTextDisplay(String qeury) {
@@ -175,6 +184,22 @@ public class MainController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void disableButton() {
+		getQueries.setDisable(true);
+		goBack.setDisable(true);
+		getDeleteQueries.setDisable(true);
+		generateSqlFile.setDisable(true);
+		
+	}
+	
+	public void enableButton() {
+		getQueries.setDisable(false);
+		goBack.setDisable(false);
+		getDeleteQueries.setDisable(false);
+		generateSqlFile.setDisable(false);
+		
 	}
 	
 
