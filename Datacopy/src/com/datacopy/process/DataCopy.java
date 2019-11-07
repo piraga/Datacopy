@@ -9,7 +9,7 @@ import com.datacopy.dao.DataManager;
 
 import javafx.scene.control.TextArea;
 
-public class DataCopy {
+public class DataCopy extends Thread {
 	
 	private boolean sviRad;
 	private boolean sviSeed;
@@ -25,14 +25,17 @@ public class DataCopy {
 	private boolean hpsMaster;
 	private boolean hpsDetail;
 	private boolean stepUp;
+	private boolean vpTransaction;
 	private TextArea ta;
+	private boolean sqlFile;
 	DataManager dm =  new DataManager();
 	MainController mc = new MainController();
+	ExportFile ef;
 	
-	DataCopy(boolean sviRad,boolean sviSeed,boolean sviTrd,boolean sviCli,
+	DataCopy(String acctId, String secId,boolean sviRad,boolean sviSeed,boolean sviTrd,boolean sviCli,
 			boolean accountMaster,boolean secMaster,boolean caAcctSec,
 			boolean caPayout,boolean caTerms,boolean caBroker,
-			boolean corpAct,boolean hpsMaster,boolean hpsDetail,boolean stepUp,TextArea ta){
+			boolean corpAct,boolean hpsMaster,boolean hpsDetail,boolean stepUp,TextArea ta, boolean vpTransaction, boolean sqlFile){
 		this.sviRad=sviRad;
 		this.sviSeed=sviSeed;
 		this.sviTrd=sviTrd;
@@ -48,9 +51,22 @@ public class DataCopy {
 		this.hpsDetail=hpsDetail;
 		this.stepUp=stepUp;
 		this.ta=ta;
+		this.vpTransaction=vpTransaction;
+		this.ta.clear();
+		this.sqlFile=sqlFile;
+		if(sqlFile)
+		ef = new ExportFile(acctId,secId);
 		
 	}
 	
+	public boolean isVpTransaction() {
+		return vpTransaction;
+	}
+
+	public void setVpTransaction(boolean vpTransaction) {
+		this.vpTransaction = vpTransaction;
+	}
+
 	public boolean isSviRad() {
 		return sviRad;
 	}
@@ -175,11 +191,55 @@ public class DataCopy {
 		
 	}
 	
+	public void getDeleteQueries(String tableName, String[] pstmNo, String[] pstm) {
+		
+		
+		String query = "DELETE  "+tableName+" WHERE ";
+		
+		if(checkAcctNoSecNoTable(tableName)) {
+			query += "ACCT_NO =\'"+pstmNo[0]+"\'AND SEC_NO =\'"+pstmNo[1]+"\';";
+		}else if(tableName.equals("ACCOUNT_MASTER")) {
+			query += "ACCT_NO =\'"+pstmNo[0]+"\';";
+			
+		}else if(tableName.equals("SEC_MASTER")) {
+			query +="SEC_NO=\'"+pstmNo[1]+"\';";
+		}else if(tableName.equals("VP_TRANSACTION")) {
+			query += "ACCT_ID =\'"+pstm[0]+"\' AND SECURITY_ID=\'"+pstm[1]+"\';";
+		}		else if(checkAcctIdSecIdTable(tableName)) {
+			query += "ACCOUNT_ID =\'"+pstm[0]+"\' AND SECURITY_ID=\'"+pstm[1]+"\';";
+		}
+		else if (checkCATables(tableName)) {
+			query += "CA_ID IN (SELECT DISTINCT CA_ID FROM CA_ACCT_SEC WHERE ACCOUNT_ID =\'"+pstm[0]+"\' AND SECURITY_ID=\'"+pstm[1]+"\');";
+		}
+		
+		ta.appendText(query+"\n");
+		
+		
+	}
+	
+	private boolean checkAcctIdSecIdTable(String tableName) {
+		// TODO Auto-generated method stub
+		return tableName.equals("CA_ACCT_SEC");
+	}
+
+	private boolean checkCATables(String tableName) {
+		// TODO Auto-generated method stub
+		return tableName.equals("CORP_ACT_PAYOUT")||tableName.equals("CORP_ACT_TERMS")||tableName.equals("CORP_ACT_BROKER") || tableName.equals("CORP_ACT");
+	}
+
+	private boolean checkAcctNoSecNoTable(String tableName) {
+		// TODO Auto-generated method stub
+		return tableName.equals("STEPUP_TRANSACTIONS")||tableName.equals("FIP_HPS_DETAIL")||tableName.equals("FIP_HPS_MASTER") || tableName.equals("SVI_RAD")||tableName.equals("SVI_TRD")||tableName.equals("SVI_SEED") || tableName.equals("SVI_CLI")  ;
+	}
+
 	public void queryProcess(String tableName, String[] pstmNo,boolean acctSecCheck) {
 		int j=1;
 		int rowcount=1;
-		ta.appendText("REM INSERTING into "+tableName +"\n" + 
-				"SET DEFINE OFF; \n");
+		if(!sqlFile) {
+			ta.appendText("REM INSERTING into "+tableName +"\n" + 
+					"SET DEFINE OFF; \n");
+		}
+		
 		String query1 = "";
 		String propName=tableName;
 		try {
@@ -187,15 +247,8 @@ public class DataCopy {
 				propName = propName+"_ACCT";
 				
 			}
-//			System.out.println(acctId+"  "+secId+"  "+acctNo+"  "+secNo);
 			ResultSet rs=dm.executeQueryByName(propName, pstmNo);
-//			rs.last(); 
-//			System.out.println("Count "+rs.getRow());
-//			while(rs.next()) {
-//				rowcount++;
-//			}
-//			ta.appendText("--Count"+rowcount+"\n");
-//			rs.beforeFirst();
+
 			ResultSetMetaData rsmd = rs.getMetaData();
 			String query = "INSERT INTO "+tableName +" (";
 			
@@ -214,9 +267,8 @@ public class DataCopy {
 			
 				for(int i=1;i<=columnCoun;i++) {
 					
-//				System.out.println(rsmd.getColumnTypeName(j));
+
 				String count = rsmd.getColumnName(j);
-//				System.out.println(count);
 				if("DATE".equals(rsmd.getColumnTypeName(j))) {
 					rs.getDate(j);
 					if ( rs.wasNull()) {
@@ -248,7 +300,7 @@ public class DataCopy {
 //						query1+=null;
 //					}else {
 //						query1+="'";
-//						query1+=rs.getInt(count);
+//						query1+=rs.getInt(count); 
 //						query1+="'";
 //					}
 					
@@ -264,14 +316,22 @@ public class DataCopy {
 				j=1;
 				query1+=");";
 				System.out.println(query+" "+query1);
+				if(!sqlFile) {
+					ta.appendText(query+" "+query1+"\n");
+				}else {
+					ef.FileWriter(query+" "+query1+"\n");
+				}
 				
-				ta.appendText(query+" "+query1+"\n");
-//				return query+" "+query1;
+				
 				query1="";
 				
 			}
-			
-			ta.appendText("\n\n");	
+			if(!sqlFile) {
+				ta.appendText("\n\n");
+			}else {
+				ef.FileWriter("\n\n");
+			}
+				
 			
 			
 			
@@ -279,18 +339,26 @@ public class DataCopy {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		return query1;
 		
 	}
 	
 	public boolean checkRawTable(String tableName) {
-		return tableName.equals("SVI_RAD")||tableName.equals("SVI_TRD")||tableName.equals("SVI_SEED");
+		return tableName.equals("SVI_RAD")||tableName.equals("SVI_TRD")||tableName.equals("SVI_SEED") || tableName.equals("SVI_CLI") ;
+	}
+	
+	public void run() {
+		processDataCopy();
 	}
 
 	public void processDataCopy() {
 		// TODO Auto-generated method stub
+		System.out.println("Parent DC");
 		processDataCopy();		
 		DataManager.disconnectDb();
+	}
+	
+	public void getDeleteQueries() {
+		getDeleteQueries();
 	}
 
 }
