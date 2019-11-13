@@ -11,12 +11,12 @@ public class FetchAcct extends DataCopy implements FetchTables {
 	private String acctNo;
 	private String secNo;
 
-	public FetchAcct(String acctId, boolean sviRad, boolean sviSeed, boolean sviTrd, boolean sviCli, boolean accountMaster, boolean secMaster,
+	public FetchAcct(String acctId, String secId, boolean sviRad, boolean sviSeed, boolean sviTrd, boolean sviCli, boolean accountMaster, boolean secMaster,
 			boolean caAcctSec, boolean caPayout, boolean caTerms, boolean caBroker, boolean corpAct, boolean hpsMaster,
-			boolean hpsDetail, boolean stepUp, TextArea ta) {
+			boolean hpsDetail, boolean stepUp, TextArea ta, boolean vpTransaction, boolean sqlFile) {
 		
-		super(sviRad, sviSeed, sviTrd, sviCli, accountMaster, secMaster, caAcctSec, caPayout, caTerms, caBroker, corpAct,
-				hpsMaster, hpsDetail, stepUp, ta);
+		super(acctId, secId,sviRad, sviSeed, sviTrd, sviCli, accountMaster, secMaster, caAcctSec, caPayout, caTerms, caBroker, corpAct,
+				hpsMaster, hpsDetail, stepUp, ta, vpTransaction, sqlFile);
 		pstm[0]= this.acctId =acctId;
 //		pstm[1]= this.secId=secId;
 		pstmNo[0]=acctNo=splitAcctId(acctId);
@@ -26,35 +26,36 @@ public class FetchAcct extends DataCopy implements FetchTables {
 	@Override
 	public void processDataCopy() {
 
-			if(isSviRad())
+		if(isSviRad())
 			processRad();
-			if(isSviTrd())
+		if(isSviTrd())
 			processTrade();
-			if(isSviSeed())
+		if(isSviSeed())
 			processSeed();
-			if(isSviCli())
+		if(isSviCli())
 			processCli();
-			if(isAccountMaster())
+		if(isAccountMaster())
 			processAccountMaster();
-			if(isSecMaster())
+		if(isSecMaster())
 			processSecurityMaster();
-			if(isCaAcctSec())
-			processCaAcctSec();
-			if(isCaPayout())
-			processCorpActPayout();
-			if(isCaTerms())
-			processCorpActTerms();
-			if(isCaBroker())
-			processCorpActBroker();
-			if(isCorpAct())
+		if(isVpTransaction())
+			processVpTransaction();
+		if(isCorpAct())
 			processCorpAct();
-			if(isHpsMaster())
+		if(isCaBroker())
+			processCorpActBroker();
+		if(isCaTerms())
+			processCorpActTerms();
+		if(isCaPayout())
+			processCorpActPayout();
+		if(isCaAcctSec())
+			processCaAcctSec();
+		if(isHpsMaster())
 			processHpsMaster();
-			if(isHpsDetail())
+		if(isHpsDetail())
 			processHpsDetail();
-			if(isStepUp())
-			processStepUp();		
-			
+		if(isStepUp())
+			processStepUp();
 		
 		
 	}
@@ -63,88 +64,6 @@ public class FetchAcct extends DataCopy implements FetchTables {
 	public void processRad() {
 		
 		queryProcess("SVI_RAD",pstmNo,false);
-		System.out.println("RAD \n");
-//		int j=1;
-//
-//		String query1 = "";
-//		try {
-//			
-//			System.out.println(acctId+"  "+secId+"  "+acctNo+"  "+secNo);
-//			ResultSet rs=dm.executeQueryByName("RAD", pstmNo);
-//			
-//			ResultSetMetaData rsmd = rs.getMetaData();
-//			String query = "INSERT INTO SVI_RAD (";
-//			
-//			int columnCoun=rsmd.getColumnCount();
-//			for(int i=1;i<=columnCoun;i++) {
-//				
-//				query+=rsmd.getColumnName(i) ;
-//				if(i!=columnCoun)
-//				{
-//					query+=",";
-//				}
-//				String count = rsmd.getColumnName(i);
-//			}
-//			query+=") VALUES(";
-//			while(rs.next()) {
-//			
-//				for(int i=1;i<=columnCoun;i++) {
-//					
-////				System.out.println(rsmd.getColumnTypeName(j));
-//				String count = rsmd.getColumnName(j);
-////				System.out.println(count);
-//				if("DATE".equals(rsmd.getColumnTypeName(j))) {
-//					rs.getDate(j);
-//					if ( rs.wasNull()) {
-//						query1+=null;
-//					}else {
-//						query1+="to_date('" + rs.getDate(j)+"','yyyy/mm/dd')";
-//					}
-//					
-//				}else if("NUMBER".equals(rsmd.getColumnTypeName(j))){
-//					rs.getInt(count);
-//					if ( rs.wasNull()) {
-//						query1+=null;
-//					}else {
-//						query1+="'";
-//						query1+=rs.getInt(count);
-//						query1+="'";
-//					}
-//					
-//				}else {
-//					rs.getString(count);
-//					if ( rs.wasNull()) {
-//						query1+=null;
-//					}else {
-//						query1+="'";
-//						query1+=rs.getString(count);
-//						query1+="'";
-//					}
-//					
-//				}
-//			
-//				
-//				if(i!=columnCoun )
-//				query1+=",";
-//				j++;
-//			}
-//				j=1;
-//				query1+=");";
-//				System.out.println(query+" "+query1);
-//				query1="";
-//				
-//			}
-			
-			
-			
-//			
-//			
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-		
 		
 	}
 
@@ -236,8 +155,14 @@ public class FetchAcct extends DataCopy implements FetchTables {
 	@Override
 	public void processStepUp() {
 		// TODO Auto-generated method stub
-		queryProcess("STEPUP_TRANSACTION",pstmNo,false);
+		queryProcess("STEPUP_TRANSACTIONS",pstmNo,false);
 		
+	}
+
+	@Override
+	public void processVpTransaction() {
+		// TODO Auto-generated method stub
+		queryProcess("VP_TRANSACTION",pstm,false);
 	}
 
 

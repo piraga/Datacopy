@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" gridLinesVisible="true" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.datacopy.controller.FrontController">
+<GridPane alignment="CENTER" gridLinesVisible="true" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.datacopy.controller.FrontController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
    </columnConstraints>
@@ -21,19 +22,22 @@
    <children>
       <VBox alignment="CENTER" prefHeight="472.0" prefWidth="681.0" spacing="20.0">
          <children>
-            <HBox alignment="CENTER">
+            <Label prefHeight="33.0" prefWidth="135.0" text="Datacopy">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" />
+            <HBox alignment="CENTER" prefHeight="380.0" prefWidth="900.0" spacing="50.0">
                <children>
-                  <Label layoutX="496.0" layoutY="146.0" prefHeight="33.0" prefWidth="135.0" text="Datacopy">
-                     <font>
-                        <Font size="27.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" spacing="10.0">
-               <children>
+                  <ListView fx:id="listView" prefHeight="214.0" prefWidth="226.0" />
                   <VBox alignment="TOP_RIGHT" layoutY="3.0">
                      <children>
+                        <Label text="DB Name">
+                           <padding>
+                              <Insets bottom="35.0" right="3.0" top="5.0" />
+                           </padding>
+                        </Label>
                         <Label alignment="TOP_RIGHT" layoutX="13.0" layoutY="3.0" prefHeight="20.0" prefWidth="76.0" text="Username">
                            <padding>
                               <Insets bottom="35.0" left="3.0" right="3.0" />
@@ -61,7 +65,7 @@
                         </Label>
                         <Label alignment="TOP_RIGHT" layoutY="212.0" text="Port Number">
                            <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              <Insets bottom="15.0" />
                            </padding>
                         </Label>
                      </children>
@@ -74,6 +78,7 @@
                   </VBox>
                   <VBox layoutX="104.0" spacing="30.0">
                      <children>
+                        <TextField fx:id="dbName" promptText="Database Name" />
                         <TextField fx:id="username" layoutX="104.0" promptText="User Name" />
                         <TextField fx:id="password" layoutX="104.0" layoutY="56.0" promptText="Password" />
                         <TextField fx:id="hostname" layoutX="104.0" layoutY="108.0" promptText="Hostname" />
@@ -84,9 +89,12 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="88.0" layoutY="275.0">
+            <HBox alignment="CENTER" layoutX="88.0" layoutY="275.0" spacing="50.0">
                <children>
-                  <Button fx:id="connectdb" alignment="CENTER" layoutX="88.0" layoutY="275.0" mnemonicParsing="false" onAction="#connectDatabase" text="Connect" textOverrun="LEADING_WORD_ELLIPSIS">
+                  <Button fx:id="deleteDetails" mnemonicParsing="false" onAction="#deleteDetails" text="Delete Details" />
+                  <Button mnemonicParsing="false" onAction="#loadDetails" text="Load Details" />
+                  <Button fx:id="save" mnemonicParsing="false" onAction="#saveDetails" text="Save Details" />
+                  <Button fx:id="connectdb" alignment="CENTER" layoutX="88.0" layoutY="275.0" mnemonicParsing="false" onAction="#connectDatabase" text="Connect DataBase" textOverrun="LEADING_WORD_ELLIPSIS">
 
             </Button>
                </children>

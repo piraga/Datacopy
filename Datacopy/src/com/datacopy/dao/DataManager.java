@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.datacopy.application.Main;
 import com.datacopy.application.PopUp;
 import com.datacopy.application.Props;
 
@@ -19,7 +20,8 @@ public class DataManager {
 	
 	
 	
-	public void connectDb(String userName, String  passWord, String sid, String hostName, String port) {
+	
+	public void connectDb(String userName, String  passWord, String sid, String hostName, String port) throws Exception {
 		popUp=new PopUp();
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -37,6 +39,8 @@ public class DataManager {
 		} catch (Exception e) {
 			System.out.println("Please check connection");
 			popUp.connectionFail();
+			throw e;
+			
 		}
 		
 	}
@@ -55,7 +59,7 @@ public class DataManager {
 //				    ResultSet.CONCUR_READ_ONLY);
 			PreparedStatement ps = con.prepareStatement(sql);
 			System.out.println(ps);
-			if(query.contains("ACCOUNT_MASTER") || query.contains("_ACCT")) {
+			if((query.contains("ACCOUNT_MASTER") || query.contains("_ACCT")) && !query.equals("CA_ACCT_SEC")) {
 				String value=pstm[0];
 				ps.setString(1,value);
 			}else if(query.contains("SEC_MASTER")){
@@ -105,6 +109,29 @@ public class DataManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void connectSnameDb(String userName, String  passWord, String sname, String hostName, String port) throws Exception {
+		popUp=new PopUp();
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+			con = DriverManager.getConnection("jdbc:oracle:thin:@//"+hostName+":"+port+"/"+sname,userName,passWord);
+//			jdbc:oracle:thin:[USER/PASSWORD]@HOST:PORT:SID
+//			jdbc:oracle:thin:[USER/PASSWORD]@//HOST:PORT/SERVICE
+			
+			ProgressBar pb = new ProgressBar();
+			pb.setProgress(0.5);
+			con.setAutoCommit(false);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Please check connection");
+			popUp.connectionFail();
+			throw e;
+		}
+		
 	}
 	
 //	public static void main(String ards[]) {
