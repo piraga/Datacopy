@@ -1,6 +1,9 @@
 package com.datacopy.controller;
 
+import java.awt.List;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import com.datacopy.application.Main;
@@ -31,13 +34,18 @@ public class MainController implements Initializable {
 	CheckBox sviRad,sviSeed,sviTrd,sviCli,accountMaster,secMaster,caAcctSec,caPayout,caTerms,caBroker,
 	corpAct,hpsMaster,hpsDetail,stepUp,vpTransaction,selectAll;
 	@FXML
-	TextField acctid,secid;
+	TextField acctid,secid,clientid,boid,firmno,subno;
 	@FXML
 	TextArea textarea = new TextArea();
 	
 	private boolean isAcctSec;
 	private String acctId;
 	private String secId;
+	private String clientId;
+	private String boId;
+	private String firmNo;
+	private String subNo;
+	
 	
 	Main main = new Main();
 
@@ -45,8 +53,8 @@ public class MainController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 //		
-//		acctid.setText("2-37-1-37415653");
-//		secid.setText("2-2684553");
+		acctid.setText("2-37-1-37415653");
+		secid.setText("2-2684553");
 		
 		
 
@@ -80,6 +88,10 @@ public class MainController implements Initializable {
 		Props p = new Props();
 		acctId=acctid.getText();
 		secId = secid.getText();
+		clientId=clientid.getText();
+		boId=boid.getText();
+		firmNo=firmno.getText();
+		subNo=subno.getText();
 //		textarea.setText("Welcome");
 		PopUp popUp = new PopUp();
 		DataCopy proc = null;
@@ -107,13 +119,53 @@ public class MainController implements Initializable {
 		} catch (Exception e) {
 			System.out.println("Catch block");
 		}
-		disableButton();
+//		disableButton();
 		proc.processDataCopy();
-		enableButton();
+//		enableButton();
+//		prepare_Update_Query(clientId,boId,firmNo,subNo,acctId,secId,p);
 		System.out.println(acctid.getText()+secid.getText());
 		
 	}
 	
+	private void prepare_Update_Query(String clientId, String boId, String firmNo, String subNo, String acctId, String secId, Props p) {
+		
+		System.out.println("Hereeeee");
+		
+//		List queryList = getListQuery();
+		String s = null;
+		Properties prop = null;
+		try {
+			 prop= p.getProperties();
+			
+			System.out.println(s);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+//		for(String propList:queryList) {
+//			
+//		}
+		s = prop.getProperty("UPDATE_SVI_RAD");
+	}
+
+//	private List getListQuery() {
+//		// TODO Auto-generated method stub
+//		
+//		List<String> list = new ArrayList<>();
+//		list.add("UPDATE_SVI_RAD");
+//		list.add("UPDATE_SVI_TRD");
+//		list.add("UPDATE_SVI_SEED");
+//		list.add("UPDATE_SVI_CLI");
+//		list.add("UPDATE_ACCOUNT_MASTER");
+//		list.add("UPDATE_SEC_MASTER");
+//		list.add("UPDATE_VP_TRANSACTION");
+//		list.add("UPDATE_FIP_HPS_MASTER");
+//		list.add("UPDATE_FIP_HPS_MASTER");
+//		return list;
+//	}
+
 	public void goBack() {
 		
 		try {
@@ -155,10 +207,10 @@ public class MainController implements Initializable {
 		} catch (Exception e) {
 			System.out.println("Catch block");
 		}
-		disableButton();
+//		disableButton();
 		proc.processDataCopy();
-		enableButton();
-		UpdateQuery_CrossPlatform();
+//		enableButton();
+//		UpdateQuery_CrossPlatform();
 		System.out.println(acctid.getText()+secid.getText());
 		
 	}

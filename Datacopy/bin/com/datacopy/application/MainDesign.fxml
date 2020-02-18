@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.45" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.datacopy.controller.MainController">
+<SplitPane dividerPositions="0.45" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.datacopy.controller.MainController">
   <items>
       <GridPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="335.0">
          <columnConstraints>
@@ -55,6 +55,26 @@
                            </font>
                         </Label>
                         <TextField fx:id="secid" layoutX="86.0" promptText="Security Id" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <TextField fx:id="clientid" layoutX="86.0" prefHeight="25.0" prefWidth="89.0" promptText="Client ID" />
+                        <HBox alignment="CENTER" spacing="10.0">
+                           <children>
+                              <TextField fx:id="boid" layoutX="86.0" prefHeight="25.0" prefWidth="89.0" promptText="BO ID" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <TextField fx:id="firmno" layoutX="86.0" prefHeight="25.0" prefWidth="89.0" promptText="Firm No" />
+                        <HBox alignment="CENTER" spacing="10.0">
+                           <children>
+                              <TextField fx:id="subno" layoutX="86.0" prefHeight="25.0" prefWidth="89.0" promptText="Sub No" />
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER">

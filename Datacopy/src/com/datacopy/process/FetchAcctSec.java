@@ -33,6 +33,8 @@ public class FetchAcctSec extends DataCopy implements FetchTables {
 
 	@Override
 	public void processDataCopy() {
+		if(isSecMaster())
+			processSecurityMaster();
 		if(isSviRad())
 			processRad();
 		if(isSviTrd())
@@ -43,8 +45,6 @@ public class FetchAcctSec extends DataCopy implements FetchTables {
 			processCli();
 		if(isAccountMaster())
 			processAccountMaster();
-		if(isSecMaster())
-			processSecurityMaster();
 		if(isVpTransaction())
 			processVpTransaction();
 		if(isCorpAct())

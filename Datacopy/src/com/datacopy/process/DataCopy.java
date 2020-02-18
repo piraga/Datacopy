@@ -343,7 +343,7 @@ public class DataCopy extends Thread {
 	}
 	
 	public boolean checkRawTable(String tableName) {
-		return tableName.equals("SVI_RAD")||tableName.equals("SVI_TRD")||tableName.equals("SVI_SEED") || tableName.equals("SVI_CLI") ;
+		return tableName.equals("SVI_RAD")||tableName.equals("SVI_TRD")||tableName.equals("SVI_SEED") || tableName.equals("SVI_CLI") || tableName.equals("STEPUP_TRANSACTIONS");
 	}
 	
 	public void run() {

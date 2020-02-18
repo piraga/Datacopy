@@ -12,7 +12,7 @@ public class Props {
 	
 	private static final String PropertiesPath = "/datacopy.properties";
 
-
+	private Properties prop;
 	
 	public Properties getProperties() throws Exception {
 //		Properties p = new Properties();
@@ -23,7 +23,7 @@ public class Props {
 		
 //		String fileName = "/db.properties";
 		
-		Properties prop	= new Properties();
+		prop	= new Properties();
 		
 		
 		InputStream ip = Props.class.getResourceAsStream(PropertiesPath);
@@ -37,6 +37,16 @@ public class Props {
 		}
 		return prop;
 	}
+
+	public Properties getProp() {
+		return prop;
+	}
+
+	public void setProp(Properties prop) {
+		this.prop = prop;
+	}
+	
+	
 
 
 }
