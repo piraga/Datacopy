@@ -29,7 +29,7 @@ public class MainController implements Initializable {
 	
 	
 	@FXML
-	Button getQueries,goBack,getDeleteQueries,generateSqlFile;
+	Button getQueries,goBack,getDeleteQueries,generateSqlFile,getRelatedAccts;
 	@FXML
 	CheckBox sviRad,sviSeed,sviTrd,sviCli,accountMaster,secMaster,caAcctSec,caPayout,caTerms,caBroker,
 	corpAct,hpsMaster,hpsDetail,stepUp,vpTransaction,selectAll;
@@ -80,6 +80,22 @@ public class MainController implements Initializable {
 			vpTransaction.setSelected(true);
 			
 			
+		}else {
+			sviRad.setSelected(false);
+			sviSeed.setSelected(false);
+			sviTrd.setSelected(false);
+			sviCli.setSelected(false);
+			accountMaster.setSelected(false);
+			secMaster.setSelected(false);
+			caAcctSec.setSelected(false);
+			caPayout.setSelected(false);
+			caTerms.setSelected(false);
+			caBroker.setSelected(false);
+			corpAct.setSelected(false);
+			hpsMaster.setSelected(false);
+			hpsDetail.setSelected(false);
+			stepUp.setSelected(false);
+			vpTransaction.setSelected(false);
 		}
 		
 	}
@@ -100,7 +116,7 @@ public class MainController implements Initializable {
 		try {
 //			isAcctSec=popUp.initialValidation(acctId, secId);
 //			if(isAcctSec) {
-				proc=new FetchAcctSec(acctId,secId,sviRad.isSelected(), sviSeed.isSelected(), sviTrd.isSelected(),
+				proc=new FetchAcctSec(clientId,boId,firmNo,subNo,acctId,secId,sviRad.isSelected(), sviSeed.isSelected(), sviTrd.isSelected(),
 						sviCli.isSelected(), accountMaster.isSelected(), secMaster.isSelected(),
 						caAcctSec.isSelected(), caPayout.isSelected(), caTerms.isSelected(),
 						caBroker.isSelected(), corpAct.isSelected(),
@@ -122,49 +138,17 @@ public class MainController implements Initializable {
 //		disableButton();
 		proc.processDataCopy();
 //		enableButton();
-//		prepare_Update_Query(clientId,boId,firmNo,subNo,acctId,secId,p);
+		if(!clientId.isEmpty()&& !boId.isEmpty() && !firmNo.isEmpty() && !subNo.isEmpty() && !acctId.isEmpty() && !secId.isEmpty())  {
+//			prepare_Update_Query(clientId,boId,firmNo,subNo,acctId,secId,p);
+			System.out.println("Innnnnnnnnnnnnnnnnnn");
+		}
+		
 		System.out.println(acctid.getText()+secid.getText());
 		
 	}
-	
-	private void prepare_Update_Query(String clientId, String boId, String firmNo, String subNo, String acctId, String secId, Props p) {
-		
-		System.out.println("Hereeeee");
-		
-//		List queryList = getListQuery();
-		String s = null;
-		Properties prop = null;
-		try {
-			 prop= p.getProperties();
-			
-			System.out.println(s);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-//		for(String propList:queryList) {
-//			
-//		}
-		s = prop.getProperty("UPDATE_SVI_RAD");
-	}
 
-//	private List getListQuery() {
-//		// TODO Auto-generated method stub
-//		
-//		List<String> list = new ArrayList<>();
-//		list.add("UPDATE_SVI_RAD");
-//		list.add("UPDATE_SVI_TRD");
-//		list.add("UPDATE_SVI_SEED");
-//		list.add("UPDATE_SVI_CLI");
-//		list.add("UPDATE_ACCOUNT_MASTER");
-//		list.add("UPDATE_SEC_MASTER");
-//		list.add("UPDATE_VP_TRANSACTION");
-//		list.add("UPDATE_FIP_HPS_MASTER");
-//		list.add("UPDATE_FIP_HPS_MASTER");
-//		return list;
-//	}
+	
+
 
 	public void goBack() {
 		
@@ -179,18 +163,26 @@ public class MainController implements Initializable {
 		
 	}
 	
+	public void getRelatedAccts(){
+		
+	}
+	
 	public void generateSqlFile() {
 		
 		Props p = new Props();
 		acctId=acctid.getText();
 		secId = secid.getText();
+		clientId=clientid.getText();
+		boId=boid.getText();
+		firmNo=firmno.getText();
+		subNo=subno.getText();
 //		textarea.setText("Welcome");
 		PopUp popUp = new PopUp();
 		DataCopy proc = null;
 		try {
 //			isAcctSec=popUp.initialValidation(acctId, secId);
 //			if(isAcctSec) {
-				proc=new FetchAcctSec(acctId,secId,sviRad.isSelected(), sviSeed.isSelected(), sviTrd.isSelected(),
+				proc=new FetchAcctSec(clientId,boId,firmNo,subNo,acctId,secId,sviRad.isSelected(), sviSeed.isSelected(), sviTrd.isSelected(),
 						sviCli.isSelected(), accountMaster.isSelected(), secMaster.isSelected(),
 						caAcctSec.isSelected(), caPayout.isSelected(), caTerms.isSelected(),
 						caBroker.isSelected(), corpAct.isSelected(),

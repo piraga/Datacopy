@@ -16,19 +16,26 @@ public class FetchAcctSec extends DataCopy implements FetchTables {
 	private String[] pstmNo = new String[2];
 	private String acctNo;
 	private String secNo;
+	private String clientId;
+	private String boId;
+	private String firmNo;
+	private String subNo;
 	
 	DataManager dm = new DataManager();
-	public FetchAcctSec(String acctId, String secId, boolean sviRad, boolean sviSeed, boolean sviTrd, boolean sviCli, boolean accountMaster,
+	public FetchAcctSec(String clientId, String boId, String firmNo, String subNo, String acctId, String secId, boolean sviRad, boolean sviSeed, boolean sviTrd, boolean sviCli, boolean accountMaster,
 			boolean secMaster, boolean caAcctSec, boolean caPayout, boolean caTerms, boolean caBroker, boolean corpAct,
-			boolean hpsMaster, boolean hpsDetail, boolean stepUp, TextArea ta, boolean vpTransaction, boolean sqlFile) {
 		
+			boolean hpsMaster, boolean hpsDetail, boolean stepUp, TextArea ta, boolean vpTransaction, boolean sqlFile) {
 		super(acctId,secId,sviRad, sviSeed, sviTrd, sviCli, accountMaster, secMaster, caAcctSec, caPayout, caTerms, caBroker, corpAct,
 				hpsMaster, hpsDetail, stepUp,ta,vpTransaction, sqlFile);
 		pstm[0]= this.acctId =acctId;
 		pstm[1]= this.secId=secId;
 		pstmNo[0]=acctNo=splitAcctId(acctId);
 		pstmNo[1]=secNo=splitSecId(secId);
-		
+		this.clientId=clientId;
+		this.boId=boId;
+		this.firmNo=firmNo;
+		this.subNo=subNo;
 	}
 
 	@Override
@@ -63,8 +70,11 @@ public class FetchAcctSec extends DataCopy implements FetchTables {
 			processHpsDetail();
 		if(isStepUp())
 			processStepUp();
-		
-		ef.FileWriterClose();
+		if(!clientId.isEmpty()&& !boId.isEmpty() && !firmNo.isEmpty() && !subNo.isEmpty() && !acctId.isEmpty() && !secId.isEmpty())  {
+			prepare_Update_Query(clientId,boId,firmNo,subNo,acctId,secId);
+			System.out.println("Innnnnnnnnnnnnnnnnnn");
+		}
+//		ef.FileWriterClose();
 		
 			
 		

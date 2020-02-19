@@ -3,7 +3,10 @@ package com.datacopy.process;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Properties;
 
+import com.datacopy.application.Props;
 import com.datacopy.controller.MainController;
 import com.datacopy.dao.DataManager;
 
@@ -359,6 +362,60 @@ public class DataCopy extends Thread {
 	
 	public void getDeleteQueries() {
 		getDeleteQueries();
+	}
+	
+	protected void prepare_Update_Query(String clientId, String boId, String firmNo, String subNo, String acctId, String secId) {
+		
+		System.out.println("Hereeeee");
+		
+		ArrayList<String> queryList = getListQuery();
+		String s = null;
+		Props p = new Props();
+		Properties prop = null;
+		try {
+			 prop= p.getProperties();
+			
+			System.out.println(s);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		for(String propList:queryList) {
+			s = prop.getProperty(propList);
+			s=s.replaceAll("CLIENT_ID=\\?", "CLIENT_ID='"+clientId+"'");
+			s=s.replaceAll("BO_ID=\\?", "BO_ID='"+boId+"'");
+			s=s.replaceAll("FIRM_NO=\\?", "FIRM_NO='"+firmNo+"'");
+			s=s.replaceAll("SUB_NO=\\?", "SUB_NO='"+subNo+"'");
+			s=s.replaceAll("ACCT_ID=\\?", "ACCT_ID='"+acctId+"'");
+			s=s.replaceAll("SECURITY_ID=\\?", "SECURITY_ID='"+secId+"'");
+			s=s.replaceAll("ACCT_NO=\\?", "ACCT_NO='"+splitAcctId(acctId)+"'");
+			s=s.replaceAll("SECURITY_ID=\\?", "SECURITY_ID='"+splitAcctId(secId)+"'");
+			System.out.println(s);
+			if(!sqlFile) {
+				ta.appendText(s+"\n");
+			}else {
+				ef.FileWriter(s+"\n");
+			}
+		}
+		
+	}
+
+	private ArrayList<String> getListQuery() {
+		// TODO Auto-generated method stub
+		
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("UPDATE_SVI_RAD");
+		list.add("UPDATE_SVI_TRD");
+		list.add("UPDATE_SVI_SEED");
+		list.add("UPDATE_SVI_CLI");
+		list.add("UPDATE_ACCOUNT_MASTER");
+		list.add("UPDATE_SEC_MASTER");
+		list.add("UPDATE_VP_TRANSACTION");
+		list.add("UPDATE_FIP_HPS_MASTER");
+		list.add("UPDATE_FIP_HPS_MASTER");
+		return list;
 	}
 
 }
