@@ -53,10 +53,11 @@ public class MainController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 //		
-		acctid.setText("2-37-1-37415653");
-		secid.setText("2-2684553");
+		acctid.setText("2-37-1-46267937");
+		secid.setText("2-3244965");
 		
-		
+//		2-37-1-46267937	2-3244965
+
 
 	}
 	
@@ -164,6 +165,35 @@ public class MainController implements Initializable {
 	}
 	
 	public void getRelatedAccts(){
+		acctId=acctid.getText();
+		secId = secid.getText();
+		clientId=clientid.getText();
+		boId=boid.getText();
+		firmNo=firmno.getText();
+		subNo=subno.getText();
+		DataCopy proc = null;
+		try {
+//			isAcctSec=popUp.initialValidation(acctId, secId);
+//			if(isAcctSec) {
+				proc=new FetchAcctSec(clientId,boId,firmNo,subNo,acctId,secId,sviRad.isSelected(), sviSeed.isSelected(), sviTrd.isSelected(),
+						sviCli.isSelected(), accountMaster.isSelected(), secMaster.isSelected(),
+						caAcctSec.isSelected(), caPayout.isSelected(), caTerms.isSelected(),
+						caBroker.isSelected(), corpAct.isSelected(),
+						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected(),textarea,vpTransaction.isSelected(),true);
+//			}else {
+//				proc=new FetchAcct(acctId,secId,sviRad.isSelected(), sviSeed.isSelected(), sviTrd.isSelected(),
+//						sviCli.isSelected(), accountMaster.isSelected(), secMaster.isSelected(),
+//						caAcctSec.isSelected(), caPayout.isSelected(), caTerms.isSelected(),
+//						caBroker.isSelected(), corpAct.isSelected(),
+//						hpsMaster.isSelected(), hpsDetail.isSelected(), stepUp.isSelected(),textarea,vpTransaction.isSelected(),true);
+//			}
+				
+			
+		} catch (Exception e) {
+			System.out.println("Catch block");
+		}
+		proc.getRelatedAccts();
+		System.out.println("Block getRelatedAccts()");
 		
 	}
 	

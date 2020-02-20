@@ -3,6 +3,7 @@ package com.datacopy.process;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.datacopy.dao.DataManager;
 
@@ -20,8 +21,10 @@ public class FetchAcctSec extends DataCopy implements FetchTables {
 	private String boId;
 	private String firmNo;
 	private String subNo;
-	
+	private int count=0;
+	private int threshold=10;
 	DataManager dm = new DataManager();
+	ArrayList<String> isDeliverACTF=new ArrayList<>();
 	public FetchAcctSec(String clientId, String boId, String firmNo, String subNo, String acctId, String secId, boolean sviRad, boolean sviSeed, boolean sviTrd, boolean sviCli, boolean accountMaster,
 			boolean secMaster, boolean caAcctSec, boolean caPayout, boolean caTerms, boolean caBroker, boolean corpAct,
 		
@@ -78,6 +81,30 @@ public class FetchAcctSec extends DataCopy implements FetchTables {
 		
 			
 		
+	}
+	public void getRelatedAccts() {
+		getRelatedAccts(acctNo,secNo);
+
+	}
+
+	
+
+	private ArrayList<String> getRelatedAccts(String acctNo, String secNo) {
+		// TODO Auto-generated method stub
+		System.out.println("Inside FetchAcctSec");
+		count++;
+		ArrayList<String> isDeliverACTF=isDeliverACTF("CHECKACTFDELIVER",acctNo,secNo,count,threshold,true);
+		if(!actflist.isEmpty()&& count<=threshold) {
+			for(String acctSec:isDeliverACTF) {
+				String[] acctSecurity=acctSec.split(";");
+				System.out.println(acctSecurity[0]+" ;"+acctSecurity[1]);
+				isDeliverACTF("CHECKACTFREVEIVE",acctSecurity[0],acctSecurity[1],count,threshold,true);
+				getRelatedAccts(acctSecurity[0],acctSecurity[1]);
+			}
+		}else if (count==threshold) {
+			isDeliverACTF("CHECKACTFDELIVER",acctNo,secNo,count,threshold,false);
+		}
+		return null;
 	}
 
 	@Override

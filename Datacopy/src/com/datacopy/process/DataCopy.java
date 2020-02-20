@@ -34,6 +34,7 @@ public class DataCopy extends Thread {
 	DataManager dm =  new DataManager();
 	MainController mc = new MainController();
 	ExportFile ef;
+	public ArrayList<String> actflist = new ArrayList<>();
 	
 	DataCopy(String acctId, String secId,boolean sviRad,boolean sviSeed,boolean sviTrd,boolean sviCli,
 			boolean accountMaster,boolean secMaster,boolean caAcctSec,
@@ -360,6 +361,11 @@ public class DataCopy extends Thread {
 		DataManager.disconnectDb();
 	}
 	
+	public void getRelatedAccts() {
+		getRelatedAccts();
+		DataManager.disconnectDb();
+	}
+	
 	public void getDeleteQueries() {
 		getDeleteQueries();
 	}
@@ -416,6 +422,59 @@ public class DataCopy extends Thread {
 		list.add("UPDATE_FIP_HPS_MASTER");
 		list.add("UPDATE_FIP_HPS_MASTER");
 		return list;
+	}
+	
+	protected ArrayList<String> isDeliverACTF(String propName,String acctNo, String secNo, int count, int threshold, boolean thresholdCheck)  {
+		ArrayList<String> list = new ArrayList<String>();
+		String[] pstmNo= new String[2];
+		pstmNo[0]=acctNo;
+		pstmNo[1]=secNo;
+		String relAcctNo;
+//		int threshold= 10;
+//		int count=0;
+		ResultSet rs=dm.executeQueryByName(propName, pstmNo);
+		ta.appendText("Account number;Security Number\n");
+		if(thresholdCheck) {
+			try {
+				if (!rs.isBeforeFirst() ) {    
+				    System.out.println("No data"); 
+				    ta.appendText("No results returned\n");
+				} 
+					
+				while(rs.next()) {
+					count++;
+					System.out.println("sssss");
+					if(propName=="CHECKACTFREVEIVE") {
+						 relAcctNo=rs.getString("ACCT_NO");
+					}else {
+						 relAcctNo=rs.getString("RELATED_ACCT");
+					}
+					
+					String relSecNo=rs.getString("SEC_NO");
+					
+					System.out.println("sssss");
+					
+					actflist.add(relAcctNo+";"+relSecNo);
+					if(count==threshold) {
+						ta.appendText("Acct="+acctNo+"Sec="+secNo+" Exceed above threshold"+"\n");
+						break;
+					}else {
+						ta.appendText(relAcctNo+";"+relSecNo+"\n");
+					}
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}else {
+			ta.appendText("Reached threshold limit 10\n");
+			
+		}
+		return list;
+		
+		// TODO Auto-generated method stub
+		
 	}
 
 }

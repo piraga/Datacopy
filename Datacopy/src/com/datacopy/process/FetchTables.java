@@ -18,6 +18,7 @@ public interface FetchTables {
 	public void processHpsDetail();
 	public void processStepUp();
 	public void processVpTransaction();
+	public void getRelatedAccts();
 	
 
 }
