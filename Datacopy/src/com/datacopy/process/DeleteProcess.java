@@ -40,14 +40,15 @@ public class DeleteProcess extends DataCopy implements FetchTables {
 			processSecurityMaster();
 		if(isVpTransaction())
 			processVpTransaction();
-		if(isCorpAct())
-			processCorpAct();
+
 		if(isCaBroker())
 			processCorpActBroker();
 		if(isCaTerms())
 			processCorpActTerms();
 		if(isCaPayout())
 			processCorpActPayout();
+		if(isCorpAct())
+			processCorpAct();
 		if(isCaAcctSec())
 			processCaAcctSec();
 		if(isHpsMaster())

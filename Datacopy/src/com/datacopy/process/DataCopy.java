@@ -30,7 +30,7 @@ public class DataCopy extends Thread {
 	private boolean stepUp;
 	private boolean vpTransaction;
 	private TextArea ta;
-	private boolean sqlFile;
+	protected boolean sqlFile;
 	DataManager dm =  new DataManager();
 	MainController mc = new MainController();
 	ExportFile ef;
@@ -391,13 +391,15 @@ public class DataCopy extends Thread {
 		for(String propList:queryList) {
 			s = prop.getProperty(propList);
 			s=s.replaceAll("CLIENT_ID=\\?", "CLIENT_ID='"+clientId+"'");
+			s=s.replaceAll("BROKER_ID=\\?", "BROKER_ID='"+clientId+"'");
 			s=s.replaceAll("BO_ID=\\?", "BO_ID='"+boId+"'");
 			s=s.replaceAll("FIRM_NO=\\?", "FIRM_NO='"+firmNo+"'");
+			s=s.replaceAll("FIRM_ID=\\?", "FIRM_ID='"+firmNo+"'");
 			s=s.replaceAll("SUB_NO=\\?", "SUB_NO='"+subNo+"'");
 			s=s.replaceAll("ACCT_ID=\\?", "ACCT_ID='"+acctId+"'");
 			s=s.replaceAll("SECURITY_ID=\\?", "SECURITY_ID='"+secId+"'");
 			s=s.replaceAll("ACCT_NO=\\?", "ACCT_NO='"+splitAcctId(acctId)+"'");
-			s=s.replaceAll("SECURITY_ID=\\?", "SECURITY_ID='"+splitAcctId(secId)+"'");
+			s=s.replaceAll("SEC_NO=\\?", "SEC_NO='"+splitSecId(secId)+"'");
 			System.out.println(s);
 			if(!sqlFile) {
 				ta.appendText(s+"\n");
@@ -424,7 +426,7 @@ public class DataCopy extends Thread {
 		return list;
 	}
 	
-	protected ArrayList<String> isDeliverACTF(String propName,String acctNo, String secNo, int count, int threshold, boolean thresholdCheck)  {
+	protected ArrayList<String> getReceiverACTF(String propName,String acctNo, String secNo, int count, int threshold, boolean thresholdCheck)  {
 		ArrayList<String> list = new ArrayList<String>();
 		String[] pstmNo= new String[2];
 		pstmNo[0]=acctNo;
@@ -432,13 +434,18 @@ public class DataCopy extends Thread {
 		String relAcctNo;
 //		int threshold= 10;
 //		int count=0;
+		if(!actflist.contains(acctNo+";"+secNo)) {
+			actflist.add(acctNo+";"+secNo);
+			ta.appendText(acctNo+";"+secNo+"\n");
+		}
+//		actflist.add(acctNo+";"+secNo);
 		ResultSet rs=dm.executeQueryByName(propName, pstmNo);
-		ta.appendText("Account number;Security Number\n");
+//		ta.appendText("Account number;Security Number\n");
 		if(thresholdCheck) {
 			try {
 				if (!rs.isBeforeFirst() ) {    
 				    System.out.println("No data"); 
-				    ta.appendText("No results returned\n");
+//				    ta.appendText("No results returned\n");
 				} 
 					
 				while(rs.next()) {
@@ -453,14 +460,16 @@ public class DataCopy extends Thread {
 					String relSecNo=rs.getString("SEC_NO");
 					
 					System.out.println("sssss");
-					
-					actflist.add(relAcctNo+";"+relSecNo);
 					if(count==threshold) {
 						ta.appendText("Acct="+acctNo+"Sec="+secNo+" Exceed above threshold"+"\n");
 						break;
-					}else {
+					}
+					if(!actflist.contains(relAcctNo+";"+relSecNo)) {
+						actflist.add(relAcctNo+";"+relSecNo);
 						ta.appendText(relAcctNo+";"+relSecNo+"\n");
 					}
+					
+
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -474,6 +483,12 @@ public class DataCopy extends Thread {
 		return list;
 		
 		// TODO Auto-generated method stub
+		
+	}
+	
+	protected void displayTextArea(String text) {
+		
+		ta.appendText(text+"\n");
 		
 	}
 

@@ -234,6 +234,7 @@ public class MainController implements Initializable {
 //		enableButton();
 //		UpdateQuery_CrossPlatform();
 		System.out.println(acctid.getText()+secid.getText());
+
 		
 	}
 	

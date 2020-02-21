@@ -104,6 +104,7 @@ public class DataManager {
 	
 	public static void disconnectDb() {
 		try {
+			if(!(con==null))
 			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -24,6 +24,7 @@ public class FetchAcctSec extends DataCopy implements FetchTables {
 	private int count=0;
 	private int threshold=10;
 	DataManager dm = new DataManager();
+	public int i=1;
 	ArrayList<String> isDeliverACTF=new ArrayList<>();
 	public FetchAcctSec(String clientId, String boId, String firmNo, String subNo, String acctId, String secId, boolean sviRad, boolean sviSeed, boolean sviTrd, boolean sviCli, boolean accountMaster,
 			boolean secMaster, boolean caAcctSec, boolean caPayout, boolean caTerms, boolean caBroker, boolean corpAct,
@@ -77,13 +78,16 @@ public class FetchAcctSec extends DataCopy implements FetchTables {
 			prepare_Update_Query(clientId,boId,firmNo,subNo,acctId,secId);
 			System.out.println("Innnnnnnnnnnnnnnnnnn");
 		}
-//		ef.FileWriterClose();
+		if(sqlFile)
+		ef.FileWriterClose();
 		
 			
 		
 	}
 	public void getRelatedAccts() {
+		displayTextArea("Account_Number;Security_number");
 		getRelatedAccts(acctNo,secNo);
+		displayTextArea("ACTF related account check completed");
 
 	}
 
@@ -92,18 +96,22 @@ public class FetchAcctSec extends DataCopy implements FetchTables {
 	private ArrayList<String> getRelatedAccts(String acctNo, String secNo) {
 		// TODO Auto-generated method stub
 		System.out.println("Inside FetchAcctSec");
+		
 		count++;
-		ArrayList<String> isDeliverACTF=isDeliverACTF("CHECKACTFDELIVER",acctNo,secNo,count,threshold,true);
+		ArrayList<String> getReceiverACTF=getReceiverACTF("CHECKACTFDELIVER",acctNo,secNo,count,threshold,true);
 		if(!actflist.isEmpty()&& count<=threshold) {
-			for(String acctSec:isDeliverACTF) {
-				String[] acctSecurity=acctSec.split(";");
+			for(;i<actflist.size();) {
+				
+				String[] acctSecurity=actflist.get(i).split(";");
 				System.out.println(acctSecurity[0]+" ;"+acctSecurity[1]);
-				isDeliverACTF("CHECKACTFREVEIVE",acctSecurity[0],acctSecurity[1],count,threshold,true);
+				getReceiverACTF("CHECKACTFDELIVER",acctSecurity[0],acctSecurity[1],count,threshold,true);
+				i++;
 				getRelatedAccts(acctSecurity[0],acctSecurity[1]);
 			}
 		}else if (count==threshold) {
-			isDeliverACTF("CHECKACTFDELIVER",acctNo,secNo,count,threshold,false);
+			getReceiverACTF("CHECKACTFDELIVER",acctNo,secNo,count,threshold,false);
 		}
+
 		return null;
 	}
 
